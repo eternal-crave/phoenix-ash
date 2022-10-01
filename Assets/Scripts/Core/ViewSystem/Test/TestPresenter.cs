@@ -5,11 +5,16 @@ using Zenject;
 
 namespace Core.ViewSystem.Core
 {
-    public class TestPresenter : Presenter
+    public class TestPresenter : Presenter, IActualType<TestView>
     {
         public void Init()
         {
            
+        }
+
+        public TestView GetActualType()
+        {
+            return View as TestView;
         }
     }
 }

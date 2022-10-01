@@ -4,8 +4,13 @@ using UnityEngine;
 
 namespace Core.ViewSystem.Core
 {
-    public class TestView : View 
+    public class TestView : View, IActualType<TestPresenter>
     {
-        
+        public TestPresenter GetActualType()
+        {
+            return Presenter as TestPresenter;
+        }
+
+      
     }
 }

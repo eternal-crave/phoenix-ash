@@ -32,12 +32,13 @@ namespace Core.ViewSystem.Test.TestPool
 
         private IPool<T> createPool<T>() where T : IPoolObject
         {
-            return new BasePool<T>();
+            return new BasePool<T>(); // Default pool
         }
 
         private void Start()
         {
-            Get<TestPoolObject>();
+            Get<TestPoolObject>(); //TEST
+            throw new Exception("YOU FORGOT TO CLEAN TEST CODE");
         }
     }
 }

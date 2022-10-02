@@ -4,13 +4,18 @@ using UnityEngine;
 
 namespace Core.ViewSystem.Core
 {
-    public class TestView : View, IActualType<TestPresenter>
+    public class TestView : View, IActualTypeOfCouple<TestPresenter>
     {
-        public TestPresenter GetActualType()
+        public TestPresenter GetActualTypeOfCouple()
         {
             return Presenter as TestPresenter;
         }
 
-      
+        private void Start()
+        {
+            Debug.Log($"From View::: This is my presenter:{Presenter}");
+            GetActualTypeOfCouple().Greet();
+        }
+
     }
 }

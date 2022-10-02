@@ -10,11 +10,12 @@ namespace Core.ViewSystem.Core
         private View view;
 
         public View View => view;
+        public virtual void Init() { }
 
-        public void SetDependencies(View view)
+        [Inject]
+        public void Construct(View view)
         {
             this.view = view;
-            view.SetDependencies(this);
         }
     }
 }

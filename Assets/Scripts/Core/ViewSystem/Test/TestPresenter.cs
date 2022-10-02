@@ -5,14 +5,14 @@ using Zenject;
 
 namespace Core.ViewSystem.Core
 {
-    public class TestPresenter : Presenter, IActualType<TestView>
+    public class TestPresenter : Presenter, IActualTypeOfCouple<TestView>
     {
-        public void Init()
+        public void Greet()
         {
-           
+            Debug.Log($"From Presenter::: This is my view:{View}");
         }
 
-        public TestView GetActualType()
+        public TestView GetActualTypeOfCouple()
         {
             return View as TestView;
         }

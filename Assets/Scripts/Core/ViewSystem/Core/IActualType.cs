@@ -1,7 +1,7 @@
 ﻿namespace Core.ViewSystem.Core
 {
-    internal interface IActualType<T>
+    public interface IActualTypeOfCouple<T>
     {
-        T GetActualType();
+        T GetActualTypeOfCouple();
     }
 }

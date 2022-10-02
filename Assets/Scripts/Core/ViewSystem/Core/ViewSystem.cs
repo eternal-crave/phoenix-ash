@@ -6,7 +6,7 @@ namespace Core.ViewSystem.Core
 {
     public class ViewSystem : MonoBehaviour
     {
-        [SerializeField] private Transform instantiateContainer;
+        [SerializeField] private static Transform instantiateContainer;
 
         private void Start()
         {
@@ -16,7 +16,6 @@ namespace Core.ViewSystem.Core
         {
             V view = ((GameObject)Instantiate(Resources.Load(typeof(V).Name),instantiateContainer)).GetComponent<V>();
             P presenter = new P();
-            presenter.SetDependencies(view);
             return presenter;
         }
     }

@@ -14,7 +14,6 @@ namespace Core.ViewSystem.Core
         private void Start()
         {
             Debug.Log($"From View::: This is my presenter:{Presenter}");
-            GetActualTypeOfCouple().Greet();
         }
 
     }

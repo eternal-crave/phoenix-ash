@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using Core.ViewSystem.Test.TestPool;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Core.ViewSystem.Core
 {
@@ -8,15 +10,13 @@ namespace Core.ViewSystem.Core
     {
         [SerializeField] private static Transform instantiateContainer;
 
-        private void Start()
-        {
-            SetupView<TestPresenter, TestView>().Init();
-        }
-        public P SetupView<P,V>() where P : Presenter, new() where V : View
+        public static P SetupView<P,V>() where P : Presenter, new() where V : View
         {
             V view = ((GameObject)Instantiate(Resources.Load(typeof(V).Name),instantiateContainer)).GetComponent<V>();
             P presenter = new P();
             return presenter;
         }
+
+
     }
 }

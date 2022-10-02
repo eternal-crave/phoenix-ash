@@ -8,10 +8,9 @@ using UnityEngine;
 
 namespace Core.ViewSystem.Test.TestPool
 {
-    public class TestPoolManager
+    public class TestPoolManager : MonoBehaviour
     {
-        private Dictionary<Type, Pool> pools = new Dictionary<Type, Pool>();
-        
+        private Dictionary<Type, IPool<IPoolObject>> pools = new Dictionary<Type, IPool<IPoolObject>>();
         public T Get<T>() where T : IPoolObject
         {
             Type key = typeof(T);
@@ -22,20 +21,23 @@ namespace Core.ViewSystem.Test.TestPool
                 return pool;
 
             }
-
-            pools.Add(key, createPool<TestPool>()); //HARDCODE
+            IPool<T> newPool = createPool<T>();
+            if(newPool is IPool<IPoolObject>)
+            {
+                throw new InvalidCastException(); // It must never work, cuz casting must always work because of method constraint
+            }
+            pools.Add(key, newPool as IPool<IPoolObject>);
             return (T)pools[key].GetInstance();
         }
 
-        private T createPool<T>() where T : Pool, new()
+        private IPool<T> createPool<T>() where T : IPoolObject
         {
-            return new T();
+            return new BasePool<T>();
         }
 
-        private 
-
-
-
-        
+        private void Start()
+        {
+            Get<TestPoolObject>();
+        }
     }
 }

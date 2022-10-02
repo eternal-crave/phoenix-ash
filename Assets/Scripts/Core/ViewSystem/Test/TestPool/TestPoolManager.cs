@@ -10,7 +10,7 @@ namespace Core.ViewSystem.Test.TestPool
 {
     public class TestPoolManager
     {
-        private Dictionary<Type, IPool<IPoolObject>> pools = new Dictionary<Type, IPool<IPoolObject>>();
+        private Dictionary<Type, Pool> pools = new Dictionary<Type, Pool>();
         
         public T Get<T>() where T : IPoolObject
         {
@@ -23,14 +23,16 @@ namespace Core.ViewSystem.Test.TestPool
 
             }
 
-            pools.Add(key, createPool<IPool<IPoolObject>>());
+            pools.Add(key, createPool<TestPool>()); //HARDCODE
             return (T)pools[key].GetInstance();
         }
 
-        private T createPool<T>() where T : IPool<IPoolObject>
+        private T createPool<T>() where T : Pool, new()
         {
-           return Activator.CreateInstance<T>();    
+            return new T();
         }
+
+        private 
 
 
 

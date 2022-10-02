@@ -4,8 +4,12 @@ using UnityEngine;
 
 namespace Core.ViewSystem.Test.TestPool
 {
-    public class TestPool : IPool
+    public class TestPool : Pool
     {
-        public IPoolObject PoolObject { get; private set; }
+
+        public override IPoolObject GetInstance()
+        {
+            return null;
+        }
     }
 }

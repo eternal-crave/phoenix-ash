@@ -9,7 +9,7 @@ namespace Core.ViewSystem.Core
     {
         private Presenter presenter;
         public Presenter Presenter => presenter;
-        public virtual void Init() { }
+        public abstract void Init();
         
         [Inject]
         public void Construct(Presenter presenter)

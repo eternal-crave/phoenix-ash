@@ -16,5 +16,10 @@ namespace Core.ViewSystem.Core
         {
             return View as TestView;
         }
+
+        public override void Init()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

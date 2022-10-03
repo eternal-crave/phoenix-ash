@@ -5,13 +5,10 @@ using Zenject;
 
 public class TestInstaller : MonoInstaller
 {
+    [SerializeField] ViewManager viewManager;
     public override void InstallBindings()
     {
-        
-        Container.Bind<View>().To<TestView>().AsSingle().WhenInjectedInto<TestPresenter>();
-        Container.Bind<Presenter>().To<TestPresenter>().AsSingle().WhenInjectedInto<TestView>();
-        ViewSystem.SetupView<TestPresenter, TestView>();
-        
+        viewManager.InstantiateViews(Container);
     }
    
 }

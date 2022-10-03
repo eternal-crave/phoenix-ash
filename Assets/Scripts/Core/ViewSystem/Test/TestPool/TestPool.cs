@@ -6,7 +6,7 @@ namespace Core.ViewSystem.Test.TestPool
 {
     public class TestPool : BasePool<TestPoolObject>
     {
-        public override TestPoolObject GetInstance()
+        public override TestPoolObject GetObjectInstance()
         {
             throw new NotImplementedException();
         }

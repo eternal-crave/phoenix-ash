@@ -11,6 +11,11 @@ namespace Core.ViewSystem.Core
             return Presenter as TestPresenter;
         }
 
+        public override void Init()
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void Start()
         {
             Debug.Log($"From View::: This is my presenter:{Presenter}");

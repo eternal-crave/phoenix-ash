@@ -10,35 +10,27 @@ namespace Core.ViewSystem.Test.TestPool
 {
     public class TestPoolManager : MonoBehaviour
     {
-        private Dictionary<Type, IPool<IPoolObject>> pools = new Dictionary<Type, IPool<IPoolObject>>();
-        public T Get<T>() where T : IPoolObject
+        private Dictionary<Type, Pool<IPoolObject>> pools = new Dictionary<Type, Pool<IPoolObject>>();
+        public T Get<T>() where T : class, IPoolObject
         {
             Type key = typeof(T);
             if (pools.ContainsKey(key))
             {
-                T pool = (T)pools[key].GetInstance();
-                pools.Remove(key);
-                return pool;
+                return (T)pools[key].GetObjectInstance();
 
             }
-            IPool<T> newPool = createPool<T>();
-            if(newPool is IPool<IPoolObject>)
+            Pool<T> newPool = createPool<T>();
+            if(newPool is Pool<IPoolObject>)
             {
                 throw new InvalidCastException(); // It must never work, cuz casting must always work because of method constraint
             }
-            pools.Add(key, newPool as IPool<IPoolObject>);
-            return (T)pools[key].GetInstance();
+            pools.Add(key, newPool as Pool<IPoolObject>);
+            return (T)pools[key].GetObjectInstance();
         }
 
-        private IPool<T> createPool<T>() where T : IPoolObject
+        private Pool<T> createPool<T>() where T : class, IPoolObject
         {
             return new BasePool<T>(); // Default pool
-        }
-
-        private void Start()
-        {
-            Get<TestPoolObject>(); //TEST
-            throw new Exception("YOU FORGOT TO CLEAN TEST CODE");
         }
     }
 }

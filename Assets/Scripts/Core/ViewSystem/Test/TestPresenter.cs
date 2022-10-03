@@ -7,11 +7,6 @@ namespace Core.ViewSystem.Core
 {
     public class TestPresenter : Presenter, IActualTypeOfCouple<TestView>
     {
-        public void Greet()
-        {
-            Debug.Log($"From Presenter::: This is my view:{View}");
-        }
-
         public TestView GetActualTypeOfCouple()
         {
             return View as TestView;
@@ -20,6 +15,13 @@ namespace Core.ViewSystem.Core
         public override void Init()
         {
             throw new System.NotImplementedException();
+        }
+
+
+        public override void Construct(View view)
+        {
+            base.Construct(view);
+            Debug.Log($"From Presenter::: This is my view:{View}");
         }
     }
 }

@@ -8,6 +8,9 @@ public class TestInstaller : MonoInstaller
     [SerializeField] ViewManager viewManager;
     public override void InstallBindings()
     {
+        //Container.Bind<View>().To<TestView>().AsSingle().WhenInjectedInto<TestPresenter>();
+       /* Container.InstantiatePrefabResource("ViewPrefabs\\TestView");
+        Container.Bind<Presenter>().To<TestPresenter>().AsSingle();*/
         viewManager.InstantiateViews(Container);
     }
    

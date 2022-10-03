@@ -12,10 +12,6 @@ namespace Core.ViewSystem.Core
         private const string path = "ViewPrefabs";
         [SerializeField] private Transform instantiateContainer;
         private List<View> views = new List<View>();
-        private void Awake()
-        {
-            instantiateContainer = FindObjectOfType<Canvas>().transform.GetChild(0);
-        }
 
         /*public static P SetupView<P,V>() where P : Presenter, new() where V : View
         {
@@ -27,10 +23,22 @@ namespace Core.ViewSystem.Core
         public void InstantiateViews(DiContainer diContainer)
         {
             views = Resources.LoadAll<View>(path).ToList();
-            foreach (View view in views)
-            {
-                diContainer.InstantiatePrefab(view);
-            }
+            /*foreach (View view in views)
+              {
+                  View obj = diContainer.InstantiatePrefabForComponent<View>(view, instantiateContainer);
+                  diContainer.Bind<View>().FromInstance(obj).AsSingle();
+              }*/
+            /* diContainer.Bind<View>().To<TestView>().FromComponentInNewPrefab(views[0]).WhenInjectedInto<TestPresenter>();
+             diContainer.Bind<Presenter>().To<TestPresenter>().WhenInjectedInto<TestView>();*/
+
+            diContainer.Bind<View>().To<TestView>().FromComponentInNewPrefab(views[0]).AsSingle().WhenInjectedInto<TestPresenter>().NonLazy();
+            diContainer.Bind<Presenter>().To<TestPresenter>().AsSingle().WhenInjectedInto<TestView>();
+
+
+            View view = diContainer.InstantiatePrefabForComponent<View>(views[0], instantiateContainer);
+            /*diContainer.Bind<View>().FromInstance(view).NonLazy();*/
+
+
         }
 
 

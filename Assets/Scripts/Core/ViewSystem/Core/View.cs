@@ -10,12 +10,11 @@ namespace Core.ViewSystem.Core
         private Presenter presenter;
         public Presenter Presenter => presenter;
         public abstract void Init();
-        
+
         [Inject]
         public void Construct(Presenter presenter)
         {
-            Debug.Log("View bind");
-            this.presenter = presenter; 
+            this.presenter = presenter;
         }
     }
 }

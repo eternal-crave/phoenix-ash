@@ -11,10 +11,5 @@ namespace Core.ViewSystem.Core
         public Presenter Presenter => presenter;
         public abstract void Init();
 
-        [Inject]
-        public void Construct(Presenter presenter)
-        {
-            this.presenter = presenter;
-        }
     }
 }

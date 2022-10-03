@@ -18,9 +18,8 @@ namespace Core.ViewSystem.Core
         }
 
 
-        public override void Construct(View view)
+        public TestPresenter(View view):base(view)
         {
-            base.Construct(view);
             Debug.Log($"From Presenter::: This is my view:{View}");
         }
     }

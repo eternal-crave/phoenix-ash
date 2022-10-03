@@ -31,13 +31,13 @@ namespace Core.ViewSystem.Core
             /* diContainer.Bind<View>().To<TestView>().FromComponentInNewPrefab(views[0]).WhenInjectedInto<TestPresenter>();
              diContainer.Bind<Presenter>().To<TestPresenter>().WhenInjectedInto<TestView>();*/
 
-            diContainer.Bind<View>().To<TestView>().FromComponentInNewPrefab(views[0]).AsSingle().WhenInjectedInto<TestPresenter>().NonLazy();
-            diContainer.Bind<Presenter>().To<TestPresenter>().AsSingle().WhenInjectedInto<TestView>();
+            // diContainer.Bind<View>().To<TestView>().FromComponentInNewPrefab(views[0]).AsSingle().WhenInjectedInto<TestPresenter>().NonLazy();
 
 
-            View view = diContainer.InstantiatePrefabForComponent<View>(views[0], instantiateContainer);
-            /*diContainer.Bind<View>().FromInstance(view).NonLazy();*/
-
+            //diContainer.Bind<Presenter>().To<TestPresenter>().AsSingle().WhenInjectedInto<TestView>().NonLazy();
+            TestView view = (TestView)diContainer.InstantiatePrefabForComponent<View>(views[0], instantiateContainer);
+            diContainer.Bind<View>().To<TestView>().FromInstance(view).AsSingle().WhenInjectedInto<TestPresenter>();
+            
 
         }
 

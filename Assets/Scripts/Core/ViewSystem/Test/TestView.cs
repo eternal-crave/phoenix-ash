@@ -16,10 +16,5 @@ namespace Core.ViewSystem.Core
             throw new System.NotImplementedException();
         }
 
-        private void Start()
-        {
-            Debug.Log($"From View::: This is my presenter:{Presenter}");
-        }
-
     }
 }

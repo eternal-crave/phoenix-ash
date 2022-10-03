@@ -12,8 +12,7 @@ namespace Core.ViewSystem.Core
         public View View => view;
         public abstract void Init();
 
-        [Inject]
-        public virtual void Construct(View view)
+        public Presenter(View view)
         {
             this.view = view;
         }

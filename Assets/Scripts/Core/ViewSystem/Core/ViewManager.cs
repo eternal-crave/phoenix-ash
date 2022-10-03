@@ -35,12 +35,15 @@ namespace Core.ViewSystem.Core
 
 
             //diContainer.Bind<Presenter>().To<TestPresenter>().AsSingle().WhenInjectedInto<TestView>().NonLazy();
-            TestView view = (TestView)diContainer.InstantiatePrefabForComponent<View>(views[0], instantiateContainer);
-            diContainer.Bind<View>().To<TestView>().FromInstance(view).AsSingle().WhenInjectedInto<TestPresenter>();
-            
+            RegisterView<TestView,TestPresenter>(diContainer);
 
         }
 
-
+        private void RegisterView<V,P>(DiContainer diContainer) where V : View, new() where P : Presenter
+        {
+            V view = (V)diContainer.InstantiatePrefabForComponent<View>(views[0], instantiateContainer);
+            diContainer.Bind<View>().To<V>().FromInstance(view).AsSingle().WhenInjectedInto<P>();
+            diContainer.Bind<Presenter>().To<P>().AsSingle().NonLazy();
+        }
     }
 }

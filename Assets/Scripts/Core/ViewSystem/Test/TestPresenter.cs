@@ -8,17 +8,15 @@ namespace Core.ViewSystem.Core
 {
     public class TestPresenter : Presenter, IActualTypeOfCouple<TestView>
     {
-        public override event Action OnClose;
 
         public TestView GetActualTypeOfCouple()
         {
             return View as TestView;
         }
 
-        public override void Init()
+        public override void Init(Action onClose)
         {
-            View.OnClose += OnClose;
-            View.Init();
+            View.Init(onClose);
         }
 
 

@@ -21,14 +21,13 @@ public class ViewInstaller : MonoInstaller
     private void RegisterView<V, P>() where V : View, new() where P : Presenter
     {
         V view = (V)Container.InstantiatePrefabResourceForComponent<View>(path+typeof(V).Name, instantiateContainer);
-        Container.Bind<View>().To<V>().FromInstance(view).AsSingle().WhenInjectedInto<P>();
-        Container.Bind<Presenter>().To<P>().AsSingle().NonLazy();
+        Container.Bind<View>().To<V>().FromInstance(view).AsSingle().WhenInjectedInto<P>().NonLazy();
+        Container.Bind<P>().AsSingle().NonLazy();
     }
 
     private void SetDependenciesForViewManager()
     {
         Container.Bind<ViewManager>().AsSingle().NonLazy();
-        Container.Bind<List<Presenter>>().AsSingle();
     }
 
 

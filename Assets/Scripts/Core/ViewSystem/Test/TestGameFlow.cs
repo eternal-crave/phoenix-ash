@@ -19,7 +19,18 @@ namespace Assets.Scripts.Core.ViewSystem.Test
 
         public void StartGameFlow()
         {
-            TestPresenter presenter = viewManager.OpenView<TestView, TestPresenter>();  
+            OpenTestView();
+        }
+
+        private void OpenTestView()
+        {
+            TestPresenter presenter = viewManager.OpenView<TestView, TestPresenter>();
+            presenter.Init(OpenTestView1);
+        }
+
+        private void OpenTestView1()
+        {
+            TestPresenter1 presenter = viewManager.OpenView<TestView1, TestPresenter1>();
             presenter.Init(() => Debug.Log("TEST VIEW HAS BEEN CLOSED"));
         }
     }

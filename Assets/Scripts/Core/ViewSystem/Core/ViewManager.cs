@@ -11,9 +11,9 @@ namespace Core.ViewSystem.Core
     {
         List<Presenter> viewPresenters = new List<Presenter>();
 
-        public ViewManager(TestPresenter testpresenter)
+        public ViewManager(List<Presenter> testpresenter)
         {
-            viewPresenters.Add(testpresenter);
+            viewPresenters.AddRange(testpresenter);
         }
 
         public Presenter OpenView<V>() where V : View

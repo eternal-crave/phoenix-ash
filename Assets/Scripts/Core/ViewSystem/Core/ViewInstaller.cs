@@ -12,6 +12,7 @@ public class ViewInstaller : MonoInstaller
     public override void InstallBindings()
     {
         RegisterView<TestView, TestPresenter>();
+        RegisterView<TestView1, TestPresenter1>();
         SetDependenciesForViewManager(); // Move to another installer maybe
         Container.Bind<TestGameFlow>().AsSingle(); // for test
 
@@ -22,7 +23,7 @@ public class ViewInstaller : MonoInstaller
     {
         V view = (V)Container.InstantiatePrefabResourceForComponent<View>(path+typeof(V).Name, instantiateContainer);
         Container.Bind<View>().To<V>().FromInstance(view).AsSingle().WhenInjectedInto<P>().NonLazy();
-        Container.Bind<P>().AsSingle().NonLazy();
+        Container.Bind<Presenter>().To<P>().AsSingle().NonLazy();
     }
 
     private void SetDependenciesForViewManager()

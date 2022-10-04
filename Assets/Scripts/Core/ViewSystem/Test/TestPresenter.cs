@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -7,6 +8,8 @@ namespace Core.ViewSystem.Core
 {
     public class TestPresenter : Presenter, IActualTypeOfCouple<TestView>
     {
+        public override event Action OnClose;
+
         public TestView GetActualTypeOfCouple()
         {
             return View as TestView;
@@ -14,7 +17,8 @@ namespace Core.ViewSystem.Core
 
         public override void Init()
         {
-            throw new System.NotImplementedException();
+            View.OnClose += OnClose;
+            View.Init();
         }
 
 

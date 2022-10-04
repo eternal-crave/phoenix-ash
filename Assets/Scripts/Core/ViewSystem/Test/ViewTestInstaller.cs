@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class ViewInstaller : MonoInstaller
+public class ViewTestInstaller : MonoInstaller
 {
     [SerializeField] Transform instantiateContainer;
     private const string path = "ViewPrefabs\\";

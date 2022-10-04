@@ -5,14 +5,10 @@ using UnityEngine;
 
 namespace Core.ViewSystem.Core
 {
-    public class TestView : View, IActualTypeOfCouple<TestPresenter>
+    public class TestView : View
     {
         public override event Action OnClose;
 
-        public TestPresenter GetActualTypeOfCouple()
-        {
-            return Presenter as TestPresenter;
-        }
 
         public override void Init()
         {

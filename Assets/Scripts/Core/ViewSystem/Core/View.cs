@@ -5,9 +5,22 @@ namespace Core.ViewSystem.Core
 {
     public abstract class View : MonoBehaviour 
     {
-        public abstract event Action OnClose;
-        public abstract void Init(Action onClose);
-        protected abstract void Close();
+        public virtual event Action OnClose;
+        public virtual void Init(Action onClose)
+        {
+            Activate();
+            OnClose = onClose;
+        }
+        protected virtual void Close()
+        {
+            OnClose?.Invoke();
+            OnClose = null;
+            gameObject.SetActive(false);
+        }
+        protected virtual void Activate()
+        {
+            gameObject.SetActive(true);
+        }
 
     }
 }

@@ -11,7 +11,10 @@ namespace Core.ViewSystem.Core
         private View view;
 
         public View View => view;
-        public abstract void Init(Action onClose);
+        public virtual void Init(Action onClose)
+        {
+            View.Init(onClose);
+        }
 
         public Presenter(View view)
         {

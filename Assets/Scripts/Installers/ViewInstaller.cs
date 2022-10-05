@@ -7,20 +7,23 @@ using ViewSystem.Presenters;
 using ViewSystem.Views;
 using Zenject;
 
-public class ViewInstaller : MonoInstaller
+namespace Installers
 {
-    [SerializeField] Transform instantiateContainer;
-    private const string path = "ViewPrefabs\\";
-    public override void InstallBindings()
+    public class ViewInstaller : MonoInstaller
     {
-        RegisterView<StartView, StartViewPresenter>();
-        RegisterView<GameView, GameViewPresenter>();
-    }
+        [SerializeField] Transform instantiateContainer;
+        private const string path = "ViewPrefabs\\";
+        public override void InstallBindings()
+        {
+            RegisterView<StartView, StartViewPresenter>();
+            RegisterView<GameView, GameViewPresenter>();
+        }
 
-    private void RegisterView<V, P>() where V : View, new() where P : Presenter
-    {
-        V view = (V)Container.InstantiatePrefabResourceForComponent<View>(path+typeof(V).Name, instantiateContainer);
-        Container.Bind<View>().To<V>().FromInstance(view).AsSingle().WhenInjectedInto<P>().NonLazy();
-        Container.Bind<Presenter>().To<P>().AsSingle().NonLazy();
+        private void RegisterView<V, P>() where V : View, new() where P : Presenter
+        {
+            V view = (V)Container.InstantiatePrefabResourceForComponent<View>(path + typeof(V).Name, instantiateContainer);
+            Container.Bind<View>().To<V>().FromInstance(view).AsSingle().WhenInjectedInto<P>().NonLazy();
+            Container.Bind<Presenter>().To<P>().AsSingle().NonLazy();
+        }
     }
 }

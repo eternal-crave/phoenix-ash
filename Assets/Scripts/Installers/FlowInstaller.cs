@@ -6,11 +6,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class FlowInstaller : MonoInstaller
+namespace Installers
 {
-    public override void InstallBindings()
+    public class FlowInstaller : MonoInstaller
     {
-        Container.Bind<ViewManager>().AsSingle().NonLazy();
-        Container.Bind<GameFlow>().AsSingle().NonLazy();
+        public override void InstallBindings()
+        {
+            Container.Bind<ViewManager>().AsSingle().NonLazy();
+            Container.Bind<GameFlow>().AsSingle().NonLazy();
+        }
     }
 }

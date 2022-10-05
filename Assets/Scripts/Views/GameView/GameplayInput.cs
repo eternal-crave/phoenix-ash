@@ -6,18 +6,18 @@ using UnityEngine.EventSystems;
 
 namespace ViewSystem.Views
 {
-    public class GameplayInput : MonoBehaviour, IPointerUpHandler, IDragHandler
+    public class GameplayInput : MonoBehaviour, IPointerDownHandler, IDragHandler
     {
         public event Action<Vector3> OnPlayerInput;
 
-        public void OnPointerUp(PointerEventData eventData)
+        public void OnPointerDown(PointerEventData eventData)
         {
-            OnPlayerInput?.Invoke(eventData.position);
+            OnPlayerInput?.Invoke(Camera.main.ScreenToWorldPoint(eventData.position));
         }
-
+            
         public void OnDrag(PointerEventData eventData)
         {
-            OnPlayerInput?.Invoke(eventData.position);
+            OnPlayerInput?.Invoke(Camera.main.ScreenToWorldPoint(eventData.position));
         }
 
         // Start is called before the first frame update

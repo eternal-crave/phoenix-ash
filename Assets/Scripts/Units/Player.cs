@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using ViewSystem.Views;
+using Zenject;
 
 namespace Units
 {
@@ -14,7 +15,6 @@ namespace Units
     {
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
-        [SerializeField] private float speed;
         private GameplayInput gameplayInput;
 
 
@@ -22,7 +22,7 @@ namespace Units
         public override float Health => health;
         public override float MaxHealth => maxHealth;
 
-
+        [Inject]
         private void Construct(GameplayInput input)
         {
             this.gameplayInput = input;
@@ -46,7 +46,12 @@ namespace Units
 
         private void Move(Vector3 position)
         {
-            transform.rotation = Quaternion.LookRotation(position);
+
+            Vector3 myLocation = transform.position;
+            Vector3 targetLocation = position;
+            Vector3 vectorToTarget = targetLocation - myLocation;
+            Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, vectorToTarget);
+            transform.rotation = targetRotation;
         }
 
         private void OnEnable()

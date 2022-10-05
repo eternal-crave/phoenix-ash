@@ -14,6 +14,7 @@ public class ViewInstaller : MonoInstaller
     public override void InstallBindings()
     {
         RegisterView<StartView, StartViewPresenter>();
+        RegisterView<GameView, GameViewPresenter>();
     }
 
     private void RegisterView<V, P>() where V : View, new() where P : Presenter

@@ -14,17 +14,20 @@ namespace ViewSystem.Views
         public override void Init(Action onClose)
         {
             base.Init(onClose);
+            tapToStartButton.onClick.AddListener(onTapToStartButtonPress);
+            
         }
-
-        
-
 
         private void onTapToStartButtonPress()
         {
             Close();
         }
 
-
+        protected override void Close()
+        {
+            base.Close();
+            tapToStartButton.onClick.RemoveAllListeners();
+        }
 
 
     }

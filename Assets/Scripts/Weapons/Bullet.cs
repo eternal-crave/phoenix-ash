@@ -1,9 +1,11 @@
 ﻿using Core.Factory;
 using Core.PoolSystem;
+using Core.UnitSystem;
+using UnityEngine;
 
-namespace Core.ViewSystem.Test.TestPool
+namespace Weapons
 {
-    public class TestPoolObject : IPoolObject, IFactoryItemPlaceHolder
+    public class Bullet : MonoBehaviour, IMakeDamage, IPoolObject, IFactoryItemPlaceHolder
     {
         public void Activate()
         {
@@ -11,6 +13,11 @@ namespace Core.ViewSystem.Test.TestPool
         }
 
         public void Deactivate()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void MakeDamage(float damage)
         {
             throw new System.NotImplementedException();
         }

@@ -11,14 +11,14 @@ namespace Core.ViewSystem.Core
     {
         List<Presenter> viewPresenters = new List<Presenter>();
 
-        public ViewManager(List<Presenter> testpresenter)
+        public ViewManager(List<Presenter> presenters)
         {
-            viewPresenters.AddRange(testpresenter);
+            viewPresenters = presenters;
         }
 
         public Presenter OpenView<V>() where V : View
         {
-            return viewPresenters.FirstOrDefault((p) => p.View.GetType() is V);
+            return viewPresenters.FirstOrDefault((p) => p.View.GetType() == typeof(V));
         }
 
         public P OpenView<V, P>() where V : View where P: Presenter

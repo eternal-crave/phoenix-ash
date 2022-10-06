@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Factory;
+using System;
 using System.Collections.Generic;
 
 namespace Core.PoolSystem
@@ -8,16 +9,16 @@ namespace Core.PoolSystem
         public abstract int AmoutOfInitialCreations { get; }
         protected Queue<T> objectPool;
         protected List<T> activeObjectPool;
+        protected Factory<IFactoryItemPlaceHolder> factory;
         public abstract T GetObjectInstance();
         protected abstract void CreateObjectInstance();
         protected abstract void CreateMultipleObjectInstances(int count);
-        protected virtual void InstertIntoPassivePool(T obj)
+        protected abstract void InstertIntoPassivePool(T obj);
+        protected abstract T ExtractFromPassivePool();
+
+        public Pool(Factory<IFactoryItemPlaceHolder> factory)
         {
-            throw new NotImplementedException();
-        }
-        protected virtual T ExtractFromPassivePool()
-        {
-            throw new NotImplementedException();
+            this.factory= factory;
         }
 
     }

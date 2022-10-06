@@ -1,4 +1,5 @@
 using Assets.Scripts.Core.ViewSystem.Test;
+using Core.Factory;
 using Core.ViewSystem.Core;
 using Core.ViewSystem.Test.TestPool;
 using System.Collections.Generic;
@@ -19,9 +20,15 @@ namespace Installers
 
         public override void InstallBindings()
         {
+            BindFactoryManager();
             BindGameplayInput();
             BindPlayer();
 
+        }
+
+        private void BindFactoryManager()
+        {
+            Container.Bind<FactoryManager>().AsSingle();
         }
 
         private void BindGameplayInput()

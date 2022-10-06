@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Factory
 {
-    public abstract class AbstractFactory
+    public interface IFactoryItemPlaceHolder
     {
     }
 }

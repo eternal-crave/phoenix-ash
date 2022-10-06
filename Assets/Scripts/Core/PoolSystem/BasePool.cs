@@ -1,15 +1,17 @@
 ﻿using Core.PoolSystem;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using Core.Factory;
 
 namespace Core.PoolSystem
 {
 
-    public class BasePool<T> : Pool<T> where T : class, IPoolObject
+    public class BasePool<T> : Pool<T> where T : class, IPoolObject, IFactoryItemPlaceHolder
     {
-        [SerializeField] private int amoutOfInitialCreations = 1;
+        private int amoutOfInitialCreations = 1;
         public override int AmoutOfInitialCreations => amoutOfInitialCreations;
-        public BasePool()
+        public BasePool(Factory<IFactoryItemPlaceHolder> factory) : base(factory)
         {
             Debug.Log("THIS FUCKIN POOL HAS BEEN CREATED !!!!!!");
             objectPool = new Queue<T>();
@@ -22,7 +24,7 @@ namespace Core.PoolSystem
         {
             if(objectPool.Count == 0)
             {
-                CreateMultipleObjectInstances();
+                CreateMultipleObjectInstances(amoutOfInitialCreations);
             }
             return ExtractFromPassivePool();
 
@@ -38,8 +40,25 @@ namespace Core.PoolSystem
 
         protected override void CreateObjectInstance()
         {
-            // Call factory
-            throw new System.NotImplementedException();
+            objectPool.Enqueue((T)factory.Create());
+        }
+
+        protected override void InstertIntoPassivePool(T obj)
+        {
+            int instanceIndex = activeObjectPool.FindIndex((o) => o.GetHashCode() == obj.GetHashCode());
+            if (instanceIndex >= 0)
+            {
+                objectPool.Enqueue(obj);
+                activeObjectPool.RemoveAt(instanceIndex);
+            }
+            else Debug.LogWarning("SOME SHIT HAPPENING WHEN TRYING TO INSERT FROM ACTIVE POOL TO PASSIVE POOL");
+        }
+
+        protected override T ExtractFromPassivePool()
+        {
+            T instance = objectPool.Dequeue();
+            activeObjectPool.Add(instance);
+            return instance;
         }
     }
 }

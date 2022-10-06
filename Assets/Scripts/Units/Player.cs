@@ -15,6 +15,7 @@ namespace Units
     {
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
+        [SerializeField] private Transform bulletSpawnPoint;
         private GameplayInput gameplayInput;
 
 
@@ -54,6 +55,11 @@ namespace Units
             transform.rotation = targetRotation;
         }
 
+        private void Attack()
+        {
+
+        }
+
         private void OnEnable()
         {
             gameplayInput.OnPlayerInput += OnUserInputHandler;
@@ -62,6 +68,17 @@ namespace Units
         private void OnDisable()
         {
             gameplayInput.OnPlayerInput -= OnUserInputHandler;
+        }
+
+        private void Update()
+        {
+            Vector2 dir = bulletSpawnPoint.transform.position- transform.position;
+            RaycastHit2D hit = Physics2D.Raycast(bulletSpawnPoint.position, dir,float.MaxValue);
+            Debug.DrawRay(bulletSpawnPoint.position, dir, Color.red); //TODO DELETE AFTER
+            if (hit.collider != null && hit.transform.TryGetComponent(out Unit enemy))
+            {
+                Attack();
+            }
         }
     }
 }

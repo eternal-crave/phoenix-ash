@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Core.PoolSystem
 {
-    public abstract class Pool<T> where T : IPoolObject
+    public abstract class Pool<T> : IPool where T : IPoolObject
     {
         public abstract int AmoutOfInitialCreations { get; }
         protected Queue<T> objectPool;

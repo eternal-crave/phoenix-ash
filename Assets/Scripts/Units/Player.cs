@@ -18,6 +18,7 @@ namespace Units
         [SerializeField] private float maxHealth;
         [SerializeField] private Transform bulletSpawnPoint;
         private GameplayInput gameplayInput;
+        private SingleWeapon singleWeapon;
 
 
         public override event Action<int> OnGetDamage;
@@ -25,9 +26,10 @@ namespace Units
         public override float MaxHealth => maxHealth;
 
         [Inject]
-        private void Construct(GameplayInput input)
+        private void Construct(GameplayInput input, SingleWeapon singleWeapon)
         {
             this.gameplayInput = input;
+            this.singleWeapon = singleWeapon;
         }
 
 
@@ -58,7 +60,6 @@ namespace Units
 
         private void Attack()
         {
-            Weapon singleWeapon = new SingleWeapon();
             singleWeapon.Shoot(Vector2.zero);
         }
 

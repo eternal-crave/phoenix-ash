@@ -12,7 +12,7 @@ namespace Core.PoolSystem
 {
     public class PoolManager : MonoBehaviour
     {
-        private Dictionary<Type, Pool<IPoolObject>> pools = new Dictionary<Type, Pool<IPoolObject>>();
+        private Dictionary<Type, IPool> pools = new Dictionary<Type, IPool>();
         private FactoryManager factoryManager;
 
         [Inject]
@@ -25,19 +25,18 @@ namespace Core.PoolSystem
             Type key = typeof(T);
             if (pools.ContainsKey(key))
             {
-                return (T)pools[key].GetObjectInstance();
-
+                return ((Pool<T>)pools[key]).GetObjectInstance();
             }
-            Pool<T> newPool = createPool<T>();
-            if (!(newPool is Pool<IPoolObject>))
+            Pool<T> newPool = (Pool<T>)createPool<T>();
+            /*if (!(newPool is Pool<IPoolObject>))
             {
                 throw new InvalidCastException(); // It must never work, cuz casting must always work because of method constraint
-            }
-            pools.Add(key, newPool as Pool<IPoolObject>);
-            return (T)pools[key].GetObjectInstance();
+            }*/
+            pools.Add(key, newPool);
+            return ((Pool<T>)pools[key]).GetObjectInstance();
         }
 
-        private Pool<T> createPool<T>() where T : class, IPoolObject, IFactoryItemPlaceHolder
+        private IPool createPool<T>() where T : class, IPoolObject, IFactoryItemPlaceHolder
         {
             return new BasePool<T>(factoryManager.GetFactory<T>()); // Default pool
         }

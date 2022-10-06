@@ -15,6 +15,10 @@ namespace Weapons
         public abstract void Shoot(Vector2 origin);
         protected abstract Bullet GetAmmo();
 
+        public Weapon(PoolManager poolManager)
+        {
+            this.poolManager = poolManager;
+        }
 
         
     }

@@ -1,12 +1,10 @@
-using Assets.Scripts.Core.ViewSystem.Test;
+using Assets.Scripts.Factories;
 using Core.Factory;
-using Core.ViewSystem.Core;
-using Core.ViewSystem.Test.TestPool;
-using System.Collections.Generic;
+using Core.PoolSystem;
 using Units;
 using UnityEngine;
-using ViewSystem.Presenters;
 using ViewSystem.Views;
+using Weapons;
 using Zenject;
 
 namespace Installers
@@ -17,11 +15,15 @@ namespace Installers
         [SerializeField] GameplayInput gameplayInput;
         [SerializeField] Player playerPrefab;
         [SerializeField] Transform playerSpawnPoint;
+        [SerializeField] PoolManager poolManager;
 
         public override void InstallBindings()
         {
             BindFactoryManager();
             BindGameplayInput();
+            Container.Bind<PoolManager>().FromInstance(poolManager).AsSingle();
+            Container.Bind<SingleWeapon>().AsSingle();
+            Container.Bind<Core.Factory.Factory<IFactoryItemPlaceHolder>>().To<BulletFactory>();
             BindPlayer();
 
         }

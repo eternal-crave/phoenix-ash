@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Core.Factory
 {
-    public abstract class Factory<T> where T : IFactoryItemPlaceHolder
+    public abstract class Factory<T> : IFactoryMarker where T : IFactoryItemPlaceHolder
     {
         protected abstract string path { get; }
         protected abstract T Instance { get; }

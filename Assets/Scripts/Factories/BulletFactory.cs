@@ -7,7 +7,7 @@ namespace Assets.Scripts.Factories
 {
     public class BulletFactory : Factory<Bullet>
     {
-        protected override string path => "Bullets";
+        protected override string path => "Bullets\\";
 
         protected override Bullet Instance => bulletPrefab;
 

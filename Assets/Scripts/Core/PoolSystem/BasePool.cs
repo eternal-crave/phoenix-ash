@@ -11,7 +11,7 @@ namespace Core.PoolSystem
     {
         private int amoutOfInitialCreations = 1;
         public override int AmoutOfInitialCreations => amoutOfInitialCreations;
-        public BasePool(Factory<IFactoryItemPlaceHolder> factory) : base(factory)
+        public BasePool(Factory<T> factory) : base(factory)
         {
             Debug.Log("THIS FUCKIN POOL HAS BEEN CREATED !!!!!!");
             objectPool = new Queue<T>();

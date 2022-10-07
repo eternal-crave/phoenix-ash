@@ -23,13 +23,13 @@ namespace Installers
             BindGameplayInput();
             Container.Bind<PoolManager>().FromInstance(poolManager).AsSingle();
             Container.Bind<SingleWeapon>().AsSingle();
-            Container.Bind<Core.Factory.Factory<IFactoryItemPlaceHolder>>().To<BulletFactory>();
             BindPlayer();
 
         }
 
         private void BindFactoryManager()
         {
+            Container.Bind<IFactoryMarker>().To<BulletFactory>().AsSingle();
             Container.Bind<FactoryManager>().AsSingle();
         }
 

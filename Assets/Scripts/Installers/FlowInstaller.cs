@@ -1,6 +1,5 @@
 using Assets.Scripts.Core.ViewSystem.Test;
 using Core.ViewSystem.Core;
-using Core.ViewSystem.Test.TestPool;
 using Scripts.GameFlow;
 using System.Collections.Generic;
 using UnityEngine;

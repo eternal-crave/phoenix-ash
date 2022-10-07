@@ -12,7 +12,6 @@ namespace Core.Factory
         List<IFactoryMarker> factories = new List<IFactoryMarker>();
         public FactoryManager(List<IFactoryMarker> factories)
         {
-            Debug.Log("sdkfsdjfnsdlkjfhdslfkjhsdlkfjhsdlfk00");
             this.factories = factories;
         }
 

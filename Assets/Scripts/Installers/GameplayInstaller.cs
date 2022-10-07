@@ -1,6 +1,7 @@
 using Assets.Scripts.Factories;
 using Core.Factory;
 using Core.PoolSystem;
+using System;
 using Units;
 using UnityEngine;
 using ViewSystem.Views;
@@ -19,18 +20,28 @@ namespace Installers
 
         public override void InstallBindings()
         {
-            BindFactoryManager();
+            BindFactories();
+            BindManagers();
             BindGameplayInput();
-            Container.Bind<PoolManager>().FromInstance(poolManager).AsSingle();
-            Container.Bind<SingleWeapon>().AsSingle();
+            Container.Bind<SingleWeapon>().AsSingle();  //////////////// FORTEST
             BindPlayer();
 
         }
 
-        private void BindFactoryManager()
+        private void BindFactories()
         {
-            Container.Bind<IFactoryMarker>().To<BulletFactory>().AsSingle();
+            BindFactory<BulletFactory>();
+        }
+
+        private void BindManagers()
+        {
             Container.Bind<FactoryManager>().AsSingle();
+            Container.Bind<PoolManager>().FromInstance(poolManager).AsSingle();
+        }
+
+        private void BindFactory<F>() where F : IFactoryMarker
+        {
+            Container.Bind<IFactoryMarker>().To<F>().AsSingle();
         }
 
         private void BindGameplayInput()
@@ -44,5 +55,7 @@ namespace Installers
             var player = Container.InstantiatePrefabForComponent<Player>(playerPrefab, playerSpawnPoint);
             Container.Bind<Player>().FromInstance(player).AsSingle();
         }
+
+
     }
 }

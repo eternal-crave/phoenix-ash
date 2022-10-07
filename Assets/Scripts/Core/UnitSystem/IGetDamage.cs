@@ -8,7 +8,8 @@ namespace Core.UnitSystem
 {
     public interface IGetDamage
     {
-        event Action<int> OnGetDamage;
+        event Action<float> OnGetDamage;
+        event Action OnDead;
         void GetDamage(float damage);
     }
 }

@@ -9,20 +9,15 @@ namespace Assets.Scripts.Factories
     {
         protected override string path => "Bullets\\";
 
-        protected override Bullet Instance => bulletPrefab;
-
-        public override Type ProductType => Instance.GetType();
-
-        private Bullet bulletPrefab;
 
         public BulletFactory()
         {
-            bulletPrefab = Resources.Load<Bullet>(path + typeof(Bullet).Name);
+            instance = Resources.Load<Bullet>(path + typeof(Bullet).Name);
         }
 
         public override Bullet Create()
         {
-            return UnityEngine.Object.Instantiate(bulletPrefab);
+            return UnityEngine.Object.Instantiate(instance);
         }
     }
 }

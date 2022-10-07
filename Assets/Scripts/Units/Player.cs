@@ -21,26 +21,29 @@ namespace Units
         private SingleWeapon singleWeapon;
 
 
-        public override event Action<int> OnGetDamage;
+        public override event Action<float> OnGetDamage;
+        public override event Action OnDead;
+
         public override float Health => health;
         public override float MaxHealth => maxHealth;
 
         [Inject]
         private void Construct(GameplayInput input, SingleWeapon singleWeapon)
         {
-            this.gameplayInput = input;
+            this.gameplayInput = input; // TODO change dependency to gameplay manager
             this.singleWeapon = singleWeapon;
         }
 
 
         public override void GetDamage(float damage)
         {
-            throw new NotImplementedException();
-        }
-
-        public override void MakeDamage(float damage)
-        {
-            throw new NotImplementedException();
+            if (health > damage)
+            {
+                health -= damage;
+                OnGetDamage?.Invoke(damage);
+                return;
+            }
+            OnDead?.Invoke();
         }
 
         private void OnUserInputHandler(Vector3 position)
@@ -86,7 +89,7 @@ namespace Units
             if (Input.GetKey(KeyCode.Space))
             {
                 Debug.Log("ATTACKING TO FUCKIN LEPRIKONS");
-                Attack();
+                Attack();  //TODO change
             }
         }
     }

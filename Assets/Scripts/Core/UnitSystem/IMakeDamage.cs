@@ -8,6 +8,6 @@ namespace Core.UnitSystem
 {
     public interface IMakeDamage
     {
-        void MakeDamage(float damage);
+        void MakeDamage(IGetDamage damageable, float damage);
     }
 }

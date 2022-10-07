@@ -1,25 +1,42 @@
 ﻿using Core.Factory;
 using Core.PoolSystem;
 using Core.UnitSystem;
+using Units;
 using UnityEngine;
 
 namespace Weapons
 {
     public class Bullet : MonoBehaviour, IMakeDamage, IPoolObject, IFactoryItemPlaceHolder
     {
+        [SerializeField] private float damage = 1;
         public void Activate()
         {
-            throw new System.NotImplementedException();
+            gameObject.SetActive(true);
         }
 
         public void Deactivate()
         {
-            throw new System.NotImplementedException();
+            gameObject.SetActive(true);
+            // Unuse() TODO implement
         }
 
-        public void MakeDamage(float damage)
+        public void MakeDamage(IGetDamage damageable, float damage)
         {
-            throw new System.NotImplementedException();
+            damageable.GetDamage(damage);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.TryGetComponent(out Enemy enemy))
+            {
+                MakeDamage(enemy, damage);
+                Deactivate();
+            }
+        }
+
+        private void OnBecameInvisible()
+        {
+            Deactivate();
         }
     }
 }

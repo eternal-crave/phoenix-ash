@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace Core.UnitSystem
 {
-    public abstract class Unit : MonoBehaviour, IMakeDamage, IGetDamage
+    public abstract class Unit : MonoBehaviour, IGetDamage
     {
-        public abstract event Action<int> OnGetDamage;
+        public abstract event Action<float> OnGetDamage;
+        public abstract event Action OnDead;
         public abstract float Health { get; }
         public abstract float MaxHealth { get; }
         public abstract void GetDamage(float damage);
-        public abstract void MakeDamage(float damage);
     }
 }

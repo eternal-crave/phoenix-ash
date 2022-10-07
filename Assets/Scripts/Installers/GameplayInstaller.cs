@@ -25,7 +25,6 @@ namespace Installers
             BindGameplayInput();
             Container.Bind<SingleWeapon>().AsSingle();  //////////////// FORTEST
             BindPlayer();
-
         }
 
         private void BindFactories()

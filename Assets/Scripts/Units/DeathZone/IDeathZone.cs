@@ -1,6 +1,7 @@
 ﻿using Core.UnitSystem;
+using UnityEngine;
 
-namespace Units
+namespace Units.DeathZone
 {
     public interface IDeathZone
     {

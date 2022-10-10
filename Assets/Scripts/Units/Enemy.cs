@@ -15,6 +15,7 @@ namespace Units
     {
         public override event Action<float> OnGetDamage;
         public override event Action OnDead;
+        public event Action<IPoolObject> OnDeactivation;
 
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
@@ -69,14 +70,14 @@ namespace Units
             StopAllCoroutines();
             OnDead = null;
             gameObject.SetActive(false);
-            //Unuse(); TODO imlement
+            OnDeactivation?.Invoke(this);
+            OnDeactivation = null;
         }
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
             if (collider.TryGetComponent<IDeathZone>(out IDeathZone deathZone)) // if enters dead zone and took damage to player
             {
-
                 MakeDamage(deathZone.GetDamageable(), damage);
                 Deactivate();
             }

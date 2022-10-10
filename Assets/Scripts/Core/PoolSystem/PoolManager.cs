@@ -28,10 +28,6 @@ namespace Core.PoolSystem
                 return ((Pool<T>)pools[key]).GetObjectInstance();
             }
             Pool<T> newPool = (Pool<T>)createPool<T>();
-            /*if (!(newPool is Pool<IPoolObject>))
-            {
-                throw new InvalidCastException(); // It must never work, cuz casting must always work because of method constraint
-            }*/
             pools.Add(key, newPool);
             return ((Pool<T>)pools[key]).GetObjectInstance();
         }

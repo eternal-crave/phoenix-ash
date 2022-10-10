@@ -1,6 +1,7 @@
 ﻿using Core.Factory;
 using Core.PoolSystem;
 using Core.UnitSystem;
+using System;
 using Units;
 using UnityEngine;
 
@@ -9,6 +10,9 @@ namespace Weapons
     public class Bullet : MonoBehaviour, IMakeDamage, IPoolObject, IFactoryItemPlaceHolder
     {
         [SerializeField] private float damage = 1;
+
+        public event Action<IPoolObject> OnDeactivation;
+
         public void Activate()
         {
             gameObject.SetActive(true);
@@ -16,8 +20,9 @@ namespace Weapons
 
         public void Deactivate()
         {
-            gameObject.SetActive(true);
-            // Unuse() TODO implement
+            gameObject.SetActive(false);
+            OnDeactivation?.Invoke(this);
+            OnDeactivation = null;
         }
 
         public void MakeDamage(IGetDamage damageable, float damage)

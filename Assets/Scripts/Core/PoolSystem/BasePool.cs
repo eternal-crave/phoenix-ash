@@ -42,21 +42,22 @@ namespace Core.PoolSystem
             objectPool.Enqueue((T)factory.Create());
         }
 
-        protected override void InstertIntoPassivePool(T obj)
+        protected override void InstertIntoPassivePool(IPoolObject obj)
         {
             int instanceIndex = activeObjectPool.FindIndex((o) => o.GetHashCode() == obj.GetHashCode());
             if (instanceIndex >= 0)
             {
-                objectPool.Enqueue(obj);
+                objectPool.Enqueue((T)obj);
                 activeObjectPool.RemoveAt(instanceIndex);
             }
             else Debug.LogWarning("SOME SHIT HAPPENING WHEN TRYING TO INSERT FROM ACTIVE POOL TO PASSIVE POOL");
         }
 
-        protected override T ExtractFromPassivePool()
+        protected override T ExtractFromPassivePool() 
         {
             T instance = objectPool.Dequeue();
             activeObjectPool.Add(instance);
+            instance.OnDeactivation += InstertIntoPassivePool;
             return instance;
         }
     }

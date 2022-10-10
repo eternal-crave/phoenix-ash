@@ -13,7 +13,7 @@ namespace Core.PoolSystem
         public abstract T GetObjectInstance();
         protected abstract void CreateObjectInstance();
         protected abstract void CreateMultipleObjectInstances(int count);
-        protected abstract void InstertIntoPassivePool(T obj);
+        protected abstract void InstertIntoPassivePool(IPoolObject obj);
         protected abstract T ExtractFromPassivePool();
 
         public Pool(Factory<T> factory)

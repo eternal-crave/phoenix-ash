@@ -11,7 +11,7 @@ namespace Assets.Scripts.Factories
 {
     internal class EnemyFactory : Factory<Enemy>
     {
-        protected override string path => "Enemies\\";
+        protected override string path => "Units\\";
 
         public EnemyFactory()
         {

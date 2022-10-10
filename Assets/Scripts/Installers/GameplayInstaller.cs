@@ -30,6 +30,7 @@ namespace Installers
         private void BindFactories()
         {
             BindFactory<BulletFactory>();
+            BindFactory<EnemyFactory>();
         }
 
         private void BindManagers()

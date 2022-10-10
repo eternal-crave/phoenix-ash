@@ -1,21 +1,27 @@
+using Core.PoolSystem;
 using System.Collections;
 using System.Collections.Generic;
+using Units;
 using UnityEngine;
+using Zenject;
 
 namespace ViewSystem.Views
 {
     public class GameplayManager : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        private Player player;
+        private PoolManager poolManager;
 
+        private Player GetPlayer()
+        {
+            return player;
         }
 
-        // Update is called once per frame
-        void Update()
+        [Inject]
+        private void Construct(PoolManager poolManager, Player player)
         {
-
+            this.poolManager = poolManager;
+            this.player = player;
         }
     }
 }

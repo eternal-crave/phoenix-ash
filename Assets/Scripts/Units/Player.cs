@@ -63,7 +63,7 @@ namespace Units
 
         private void Attack()
         {
-            singleWeapon.Shoot(Vector2.zero);
+            //singleWeapon.Shoot(Vector2.zero);
         }
 
         private void OnEnable()
@@ -81,15 +81,10 @@ namespace Units
             Vector2 dir = bulletSpawnPoint.transform.position- transform.position;
             RaycastHit2D hit = Physics2D.Raycast(bulletSpawnPoint.position, dir,float.MaxValue);
             Debug.DrawRay(bulletSpawnPoint.position, dir, Color.red); //TODO DELETE AFTER
-            /*if (hit.collider != null && hit.transform.TryGetComponent(out Unit enemy))
+            if (hit.collider != null && hit.transform.TryGetComponent(out Unit enemy))
             {
-                Attack();
-            }*/
-
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Debug.Log("ATTACKING TO FUCKIN LEPRIKONS");
-                Attack();  //TODO change
+                Debug.Log("DETECTION");
+                //Attack();
             }
         }
     }

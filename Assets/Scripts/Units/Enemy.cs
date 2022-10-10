@@ -32,11 +32,11 @@ namespace Units
             transform.position = position;
         }
 
-        public void Init(Vector3 position, Vector3 direction)
+        public void Init(Vector3 position, Vector3 targetPos)
         {
             SetPosition(position);
             Activate();
-            Move();
+            Move(targetPos);
         }
 
         public override void GetDamage(float damage)
@@ -56,9 +56,9 @@ namespace Units
             damageable.GetDamage(damage);
         }
 
-        private void Move()
+        private void Move(Vector3 targetPos)
         {
-            StartCoroutine("moveCoroutine");
+            StartCoroutine("moveEnumerator", targetPos);
         }
         public void Activate()
         {
@@ -77,18 +77,19 @@ namespace Units
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.TryGetComponent<IDeathZone>(out IDeathZone deathZone)) // if enters dead zone and took damage to player
+            if (collider.TryGetComponent(out IDeathZone deathZone)) // if enters dead zone and took damage to player
             {
                 MakeDamage(deathZone.GetDamageable(), damage);
                 Deactivate();
             }
         }
 
-        private IEnumerator moveEnumerator(Vector3 direction)
+        private IEnumerator moveEnumerator(Vector3 targetPos)
         {
             while (true)
             {
-                gameObject.transform.position = Vector3.Lerp(transform.position, direction, speed * Time.deltaTime);
+                Debug.Log("MOVING");
+                gameObject.transform.position = Vector3.Lerp(transform.position, targetPos, speed/100 * Time.deltaTime);
                 yield return null;
             }
         }

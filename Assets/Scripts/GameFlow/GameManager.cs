@@ -1,4 +1,4 @@
-﻿using Scripts.GameFlow;
+﻿using GameFlow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Core.ViewSystem.Test
+namespace GameFlow.Managers
 {
     public class GameManager : MonoBehaviour
     {

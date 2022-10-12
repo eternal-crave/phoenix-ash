@@ -20,7 +20,7 @@ namespace Core.PoolSystem
         {
             this.factoryManager = factoryManager;
         }
-        public T Get<T>() where T : class, IPoolObject, IFactoryItemPlaceHolder
+        public T Get<T>(int count = 1) where T : class, IPoolObject, IFactoryItemPlaceHolder
         {
             Type key = typeof(T);
             if (pools.ContainsKey(key))

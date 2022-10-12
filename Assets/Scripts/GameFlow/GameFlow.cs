@@ -3,7 +3,7 @@ using UnityEngine;
 using ViewSystem.Presenters;
 using ViewSystem.Views;
 
-namespace Scripts.GameFlow
+namespace GameFlow
 {
     public class GameFlow
     {

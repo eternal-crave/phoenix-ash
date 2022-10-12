@@ -18,7 +18,7 @@ namespace Units
         [SerializeField] private float maxHealth;
         [SerializeField] private Transform bulletSpawnPoint;
         private GameplayInput gameplayInput;
-        private SingleWeapon singleWeapon;
+        private Weapon weapon;
 
 
         public override event Action<float> OnGetDamage;
@@ -26,14 +26,6 @@ namespace Units
 
         public override float Health => health;
         public override float MaxHealth => maxHealth;
-
-        [Inject]
-        private void Construct(GameplayInput input, SingleWeapon singleWeapon)
-        {
-            this.gameplayInput = input; // TODO change dependency to gameplay manager
-            this.singleWeapon = singleWeapon;
-        }
-
 
         public override void GetDamage(float damage)
         {
@@ -44,6 +36,16 @@ namespace Units
                 return;
             }
             OnDead?.Invoke();
+        }
+
+        public void Init(GameplayInput gameplayInput)
+        {
+            this.gameplayInput = gameplayInput;
+        }
+
+        public void SetWeapon(Weapon weapon)
+        {
+            this.weapon = weapon;
         }
 
         private void OnUserInputHandler(Vector3 position)
@@ -63,7 +65,7 @@ namespace Units
 
         private void Attack()
         {
-            //singleWeapon.Shoot(Vector2.zero);
+            weapon.Shoot(bulletSpawnPoint.transform.position);
         }
 
         private void OnEnable()
@@ -84,7 +86,7 @@ namespace Units
             if (hit.collider != null && hit.transform.TryGetComponent(out Unit enemy))
             {
                 Debug.Log("DETECTION");
-                //Attack();
+                Attack();
             }
         }
     }

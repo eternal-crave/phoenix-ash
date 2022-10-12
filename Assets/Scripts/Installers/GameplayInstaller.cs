@@ -1,6 +1,7 @@
 using Assets.Scripts.Factories;
 using Core.Factory;
 using Core.PoolSystem;
+using GameFlow.Managers;
 using System;
 using Units;
 using UnityEngine;
@@ -20,11 +21,19 @@ namespace Installers
 
         public override void InstallBindings()
         {
+            BindPlayer();
             BindFactories();
             BindManagers();
             BindGameplayInput();
-            Container.Bind<SingleWeapon>().AsSingle();  //////////////// FORTEST
-            BindPlayer();
+            BindWeapons();
+        }
+
+
+        void BindWeapons()
+        {
+            Container.Bind<Weapon>().To<SingleWeapon>().AsSingle();
+            Container.Bind<Weapon>().To<QueueWeapon>().AsSingle();
+            Container.Bind<Weapon>().To<SemiCircleWeapon>().AsSingle();
         }
 
         private void BindFactories()
@@ -35,7 +44,9 @@ namespace Installers
 
         private void BindManagers()
         {
+            Container.Bind<GameplayManager>().AsSingle().NonLazy();
             Container.Bind<FactoryManager>().AsSingle();
+            Container.Bind<WeaponManager>().AsSingle();
             Container.Bind<PoolManager>().FromInstance(poolManager).AsSingle();
         }
 

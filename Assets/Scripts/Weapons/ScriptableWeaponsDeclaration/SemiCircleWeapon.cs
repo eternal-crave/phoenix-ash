@@ -6,9 +6,9 @@ namespace Weapons
 {
     public class SemiCircleWeapon : Weapon
     {
-        public SemiCircleWeapon(PoolManager poolManager) : base(poolManager)
+        /*public SemiCircleWeapon(PoolManager poolManager) : base(poolManager)
         {
-        }
+        }*/
 
         public override void Shoot(Vector2 origin)
         {

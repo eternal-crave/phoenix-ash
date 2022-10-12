@@ -6,9 +6,9 @@ namespace Weapons
 {
     public class QueueWeapon : Weapon
     {
-        public QueueWeapon(PoolManager poolManager) : base(poolManager)
+        /*public QueueWeapon(PoolManager poolManager) : base(poolManager)
         {
-        }
+        }*/
 
         public override void Shoot(Vector2 origin)
         {

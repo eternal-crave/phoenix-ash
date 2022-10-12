@@ -9,9 +9,15 @@ namespace Weapons
 {
     public class Bullet : MonoBehaviour, IMakeDamage, IPoolObject, IFactoryItemPlaceHolder
     {
+        [SerializeField] private Rigidbody2D rb;
         [SerializeField] private float damage = 1;
 
         public event Action<IPoolObject> OnDeactivation;
+
+        public void SetForce(Vector2 dir)
+        {
+            rb.AddForce(dir, ForceMode2D.Impulse);
+        }
 
         public void Activate()
         {

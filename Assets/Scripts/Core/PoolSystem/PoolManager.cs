@@ -27,14 +27,23 @@ namespace Core.PoolSystem
             {
                 return ((Pool<T>)pools[key]).GetObjectInstance();
             }
-            Pool<T> newPool = (Pool<T>)createPool<T>();
+            Pool<T> newPool = (Pool<T>)CreatePool<T>();
             pools.Add(key, newPool);
             return ((Pool<T>)pools[key]).GetObjectInstance();
         }
 
-        private IPool createPool<T>() where T : class, IPoolObject, IFactoryItemPlaceHolder
+        private IPool CreatePool<T>() where T : class, IPoolObject, IFactoryItemPlaceHolder
         {
             return new BasePool<T>(factoryManager.GetFactory<T>()); // Default pool
+        }
+
+        public Pool<T> GetPool<T>() where T: class, IPoolObject, IFactoryItemPlaceHolder
+        {
+            if (!pools.ContainsKey(typeof(T)))
+            {
+                pools[typeof(T)] = CreatePool<T>();
+            }
+            return (Pool<T>)pools[typeof(T)];
         }
     }
 }

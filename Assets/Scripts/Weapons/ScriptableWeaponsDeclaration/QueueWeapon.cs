@@ -4,18 +4,10 @@ using UnityEngine;
 
 namespace Weapons
 {
+    [CreateAssetMenu(fileName = "QueueWeapon", menuName = "Weapons/QueueWeapon")]
     public class QueueWeapon : Weapon
     {
-        /*public QueueWeapon(PoolManager poolManager) : base(poolManager)
-        {
-        }*/
-
         public override void Shoot(Vector2 origin)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override Bullet GetAmmo()
         {
             throw new NotImplementedException();
         }

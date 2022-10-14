@@ -1,4 +1,5 @@
 ﻿using Core.PoolSystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,15 +14,26 @@ namespace Weapons
         [SerializeField] protected float ShootRateMilliseconds;
         [SerializeField] protected float bulletSpeed;
         [SerializeField] protected float damage;
-        protected PoolManager poolManager;
+        protected float lastShootTime;
+        protected Pool<Bullet> ammoPool;
 
         public abstract void Shoot(Vector2 origin);
-        protected abstract Bullet GetAmmo();
-
-        /*public Weapon(PoolManager poolManager)
+        protected virtual Bullet GetAmmo()
         {
-            this.poolManager = poolManager; // Figure out how to inject pool manager
-        }*/
+            return ammoPool.GetObjectInstance();
+        }
+        public virtual Weapon Init(Pool<Bullet> ammoPool)
+        {
+            this.ammoPool = ammoPool;
+            return this;
+        }
+
+        private void OnDisable()
+        {
+            lastShootTime = 0;
+        }
+
+
     }
 
     public enum WeaponType

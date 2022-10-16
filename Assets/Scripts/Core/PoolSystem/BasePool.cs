@@ -22,8 +22,6 @@ namespace Core.PoolSystem
 
         public override T GetObjectInstance()
         {
-            Debug.Log("------------------------------------------------------------" +
-                $"PASSIVE:{objectPool.Count} ------------ ACTIVE{activeObjectPool.Count}");
             if(objectPool.Count == 0)
             {
                 CreateMultipleObjectInstances(amoutOfInitialCreations);
@@ -52,7 +50,6 @@ namespace Core.PoolSystem
             {
                 objectPool.Enqueue((T)obj);
                 activeObjectPool.RemoveAt(instanceIndex);
-                Debug.Log($"PASSIVE:{objectPool.Count} ------------ ACTIVE{activeObjectPool.Count}");
             }
             else Debug.LogWarning("SOME SHIT HAPPENING WHEN TRYING TO INSERT FROM ACTIVE POOL TO PASSIVE POOL");
         }

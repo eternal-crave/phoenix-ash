@@ -17,6 +17,7 @@ namespace Weapons
             Debug.Log("Single Shot");
             lastShootTime = Time.time;
             Bullet bullet = GetAmmo();
+            bullet.Activate();
             bullet.transform.position = origin;
             bullet.SetForce(direction * bulletSpeed);
         }

@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Factory;
+using Weapons;
 
 namespace Core.PoolSystem
 {
@@ -21,6 +22,8 @@ namespace Core.PoolSystem
 
         public override T GetObjectInstance()
         {
+            Debug.Log("------------------------------------------------------------" +
+                $"PASSIVE:{objectPool.Count} ------------ ACTIVE{activeObjectPool.Count}");
             if(objectPool.Count == 0)
             {
                 CreateMultipleObjectInstances(amoutOfInitialCreations);
@@ -44,11 +47,12 @@ namespace Core.PoolSystem
 
         protected override void InstertIntoPassivePool(IPoolObject obj)
         {
-            int instanceIndex = activeObjectPool.FindIndex((o) => o.GetHashCode() == obj.GetHashCode());
+            int instanceIndex = activeObjectPool.FindIndex((o) => o.ID == obj.ID);
             if (instanceIndex >= 0)
             {
                 objectPool.Enqueue((T)obj);
                 activeObjectPool.RemoveAt(instanceIndex);
+                Debug.Log($"PASSIVE:{objectPool.Count} ------------ ACTIVE{activeObjectPool.Count}");
             }
             else Debug.LogWarning("SOME SHIT HAPPENING WHEN TRYING TO INSERT FROM ACTIVE POOL TO PASSIVE POOL");
         }

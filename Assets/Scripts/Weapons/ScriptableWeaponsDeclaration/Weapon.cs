@@ -11,13 +11,13 @@ namespace Weapons
     public abstract class Weapon : ScriptableObject
     {
         [SerializeField] protected WeaponType type;
-        [SerializeField] protected float ShootRateMilliseconds;
+        [SerializeField] protected float FireRate;
         [SerializeField] protected float bulletSpeed;
         [SerializeField] protected float damage;
         protected float lastShootTime;
         protected Pool<Bullet> ammoPool;
 
-        public abstract void Shoot(Vector2 origin);
+        public abstract void Shoot(Vector2 origin, Vector2 direaction);
         protected virtual Bullet GetAmmo()
         {
             return ammoPool.GetObjectInstance();

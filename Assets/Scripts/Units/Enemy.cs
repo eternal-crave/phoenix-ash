@@ -27,6 +27,8 @@ namespace Units
         public override float Health => health;
         public override float MaxHealth => maxHealth;
 
+        public int ID => GetInstanceID();
+
         protected void SetPosition(Vector3 position)
         {
             transform.position = position;

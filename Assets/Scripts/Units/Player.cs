@@ -63,9 +63,10 @@ namespace Units
             transform.rotation = targetRotation;
         }
 
-        private void Attack()
+        private void Attack(Vector2 lookDirection)
         {
-            weapon.Shoot(bulletSpawnPoint.transform.position);
+            Debug.Log("SHOOT !!!!!!!!!-------!!!!!!!======-------------=====___!!!");
+            weapon.Shoot(bulletSpawnPoint.transform.position, lookDirection);
         }
 
         private void OnEnable()
@@ -80,13 +81,13 @@ namespace Units
 
         private void Update()
         {
-            Vector2 dir = bulletSpawnPoint.transform.position- transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(bulletSpawnPoint.position, dir,float.MaxValue);
-            Debug.DrawRay(bulletSpawnPoint.position, dir, Color.red); //TODO DELETE AFTER
+            Vector2 lookDirection = bulletSpawnPoint.transform.position- transform.position;
+            RaycastHit2D hit = Physics2D.Raycast(bulletSpawnPoint.position, lookDirection,float.MaxValue);
+            Debug.DrawRay(bulletSpawnPoint.position, lookDirection, Color.red); //TODO DELETE AFTER
             if (hit.collider != null && hit.transform.TryGetComponent(out Unit enemy))
             {
                 Debug.Log("DETECTION");
-                Attack();
+                Attack(lookDirection);
             }
         }
     }

@@ -12,6 +12,8 @@ namespace Weapons
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private float damage = 1;
 
+        public int ID => GetInstanceID();
+
         public event Action<IPoolObject> OnDeactivation;
 
         public void SetForce(Vector2 dir)

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beacec26126076a4793849afdbb6f162, type: 3}
   m_Name: SemiCircleWeapon
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   ShootRateMilliseconds: 0
   bulletSpeed: 0
   damage: 0

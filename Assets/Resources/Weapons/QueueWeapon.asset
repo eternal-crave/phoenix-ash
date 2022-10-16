@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a9911da77f9d894eb37f006e515823e, type: 3}
   m_Name: QueueWeapon
   m_EditorClassIdentifier: 
-  type: 0
+  type: 2
   ShootRateMilliseconds: 0
   bulletSpeed: 0
   damage: 0

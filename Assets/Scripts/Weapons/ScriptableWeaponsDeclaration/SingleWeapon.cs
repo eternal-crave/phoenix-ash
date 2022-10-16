@@ -8,17 +8,17 @@ namespace Weapons
     public class SingleWeapon : Weapon
     {
        
-        public override void Shoot(Vector2 origin)
+        public override void Shoot(Vector2 origin, Vector2 direction)
         {
-            if (Time.time < TimeSpan.FromMilliseconds(ShootRateMilliseconds).Seconds + lastShootTime)
+            if (Time.time < FireRate + lastShootTime)
             {
                 return;
             }
-
-            Debug.Log("Single shoot");
+            Debug.Log("Single Shot");
+            lastShootTime = Time.time;
             Bullet bullet = GetAmmo();
             bullet.transform.position = origin;
-            bullet.SetForce(Vector2.up * bulletSpeed);
+            bullet.SetForce(direction * bulletSpeed);
         }
     }
 }

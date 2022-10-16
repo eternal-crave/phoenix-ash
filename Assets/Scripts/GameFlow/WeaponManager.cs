@@ -15,11 +15,14 @@ namespace GameFlow.Managers
         private List<Weapon> weapons;
         private PoolManager poolManager;
 
-        public WeaponManager()
+        public WeaponManager(PoolManager poolmanager)
         {
+            this.poolManager = poolmanager;
             weapons = new List<Weapon>();
-            weapons.ForEach(x => x.Init(poolManager.GetPool<Bullet>()));
+
+
             weapons.AddRange(Resources.LoadAll<Weapon>(path));
+            weapons.ForEach(x => x.Init(poolManager.GetPool<Bullet>()));
         }
 
         public W GetWeapon<W>() where W : Weapon

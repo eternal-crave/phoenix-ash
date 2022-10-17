@@ -28,8 +28,14 @@ namespace GameFlow
         private void OpenGameView()
         {
             GameViewPresenter presenter = viewManager.OpenView<GameView, GameViewPresenter>();
-            presenter.Init(null);
+            presenter.Init(OpenGameOverScreen);
 
+        }
+
+        private void OpenGameOverScreen()
+        {
+            GameOverViewPresenter presenter = viewManager.OpenView<GameOverView, GameOverViewPresenter>();
+            presenter?.Init(null);
         }
     }
 }

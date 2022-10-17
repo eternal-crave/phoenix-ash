@@ -40,11 +40,11 @@ namespace Weapons
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if(other.TryGetComponent(out Enemy enemy))
+            /*if(other.TryGetComponent(out Enemy enemy))
             {
                 MakeDamage(enemy, damage);
                 Deactivate();
-            }
+            }*/
         }
 
         private void OnBecameInvisible()

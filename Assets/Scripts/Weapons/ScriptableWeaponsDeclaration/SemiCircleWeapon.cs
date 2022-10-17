@@ -33,11 +33,11 @@ namespace Weapons
         {
             Debug.Log(rotationOffset);
             List<Bullet> result = new List<Bullet>();
-            float radianStep = (((225+rotationOffset) / amount)) * Mathf.PI / 180;
-            radianStep += offsetAngle * Mathf.PI / 180;
+            float radianStep = (((225/*+rotationOffset*/) / amount)) * Mathf.PI / 180;
+            //radianStep += offsetAngle * Mathf.PI / 180;
             for (int i = 1; i <= amount; i++)
             {
-                float angle = i * (radianStep );
+                float angle = i * radianStep;
                 
                 Bullet bullet = GetAmmo();
                 bullet.transform.position = origin + new Vector3(Mathf.Cos(angle) * radius

@@ -17,4 +17,4 @@ MonoBehaviour:
   bulletSpeed: 15
   radius: 1
   amountOfBullets: 6
-  offsetAngle: -10
+  offsetAngle: 0

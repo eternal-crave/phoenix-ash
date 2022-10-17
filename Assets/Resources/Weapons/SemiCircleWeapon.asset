@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: SemiCircleWeapon
   m_EditorClassIdentifier: 
   type: 1
-  ShootRateMilliseconds: 0
-  bulletSpeed: 0
-  damage: 0
+  fireRate: 1
+  bulletSpeed: 15
+  damage: 1
+  radius: 1
+  amountOfBullets: 6
+  offsetAngle: -10

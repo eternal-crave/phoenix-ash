@@ -8,13 +8,12 @@ namespace Weapons
     public class SingleWeapon : Weapon
     {
        
-        public override void Shoot(Vector2 origin, Vector2 direction)
+        public override void Shoot(Vector3 origin, Quaternion rotation, Vector3 direction)
         {
-            if (Time.time < FireRate + lastShootTime)
+            if (Time.time < fireRate + lastShootTime)
             {
                 return;
             }
-            Debug.Log("Single Shot");
             lastShootTime = Time.time;
             Bullet bullet = GetAmmo();
             bullet.Activate();

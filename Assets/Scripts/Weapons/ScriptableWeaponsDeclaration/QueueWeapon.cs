@@ -7,7 +7,7 @@ namespace Weapons
     [CreateAssetMenu(fileName = "QueueWeapon", menuName = "Weapons/QueueWeapon")]
     public class QueueWeapon : Weapon
     {
-        public override void Shoot(Vector2 origin, Vector2 direction)
+        public override void Shoot(Vector3 origin, Quaternion rotation, Vector3 direction)
         {
             throw new NotImplementedException();
         }

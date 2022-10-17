@@ -65,8 +65,7 @@ namespace Units
 
         private void Attack(Vector2 lookDirection)
         {
-            Debug.Log("SHOOT !!!!!!!!!-------!!!!!!!======-------------=====___!!!");
-            weapon.Shoot(bulletSpawnPoint.transform.position, lookDirection);
+            weapon.Shoot(bulletSpawnPoint.transform.position, transform.rotation, lookDirection);
         }
 
         private void OnEnable()

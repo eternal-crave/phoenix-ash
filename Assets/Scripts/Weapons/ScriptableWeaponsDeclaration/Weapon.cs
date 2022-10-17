@@ -13,7 +13,6 @@ namespace Weapons
         [SerializeField] protected WeaponType type;
         [SerializeField] protected float fireRate;
         [SerializeField] protected float bulletSpeed;
-        [SerializeField] protected float damage;
         protected float lastShootTime;
         protected Pool<Bullet> ammoPool;
 

@@ -15,7 +15,6 @@ MonoBehaviour:
   type: 1
   fireRate: 1
   bulletSpeed: 15
-  damage: 1
   radius: 1
   amountOfBullets: 6
   offsetAngle: -10

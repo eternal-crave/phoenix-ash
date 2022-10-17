@@ -30,7 +30,7 @@ namespace ViewSystem.Views
             this.player = player;
             this.weaponManager = weaponManager;
             this.player.Init(gameplayInput);
-            this.player.SetWeapon(this.weaponManager.GetWeapon<SemiCircleWeapon>()); // FORTEST
+            this.player.SetWeapon(this.weaponManager.GetWeapon<SingleWeapon>()); // FORTEST
         }
     }
 }

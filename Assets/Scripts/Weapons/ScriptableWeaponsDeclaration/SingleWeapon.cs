@@ -10,11 +10,12 @@ namespace Weapons
        
         public override void Shoot(Vector3 origin, Quaternion rotation, Vector3 direction)
         {
-            if (Time.time < fireRate + lastShootTime)
+            //Fire rate
+            if (!CanShoot())
             {
                 return;
             }
-            lastShootTime = Time.time;
+
             Bullet bullet = GetAmmo();
             bullet.Activate();
             bullet.transform.position = origin;

@@ -28,6 +28,16 @@ namespace Weapons
             return this;
         }
 
+        protected bool CanShoot()
+        {
+            if (Time.time < fireRate + lastShootTime)
+            {
+                return false;
+            }
+            lastShootTime = Time.time;
+            return true;
+        }
+
         private void OnDisable()
         {
             lastShootTime = 0;

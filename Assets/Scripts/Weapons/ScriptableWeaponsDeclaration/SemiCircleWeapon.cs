@@ -13,12 +13,11 @@ namespace Weapons
         [SerializeField] private float offsetAngle;
         public override void Shoot(Vector3 origin, Quaternion rotation, Vector3 direction)
         {
-            // Fire rate 
-            if (Time.time < fireRate + lastShootTime)
+            //Fire rate
+            if (!CanShoot())
             {
                 return;
             }
-            lastShootTime = Time.time;
 
 
             //Bullets setup to shoot to the FUCKIN LEPRIKONS

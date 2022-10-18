@@ -1,6 +1,7 @@
 using Assets.Scripts.Factories;
 using Core.Factory;
 using Core.PoolSystem;
+using Core.SaveSystem.PlayerPrefsSaveSystem;
 using GameFlow.Managers;
 using System;
 using Units;
@@ -21,6 +22,7 @@ namespace Installers
 
         public override void InstallBindings()
         {
+            BindSaveSystem();
             BindPlayer();
             BindFactories();
             BindManagers();
@@ -65,6 +67,11 @@ namespace Installers
         {
             var player = Container.InstantiatePrefabForComponent<Player>(playerPrefab, playerSpawnPoint);
             Container.Bind<Player>().FromInstance(player).AsSingle();
+        }
+
+        private void BindSaveSystem()
+        {
+            Container.Bind<PPSaveSystem>().AsSingle();
         }
 
 

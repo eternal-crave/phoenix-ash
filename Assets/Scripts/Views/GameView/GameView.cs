@@ -36,9 +36,24 @@ namespace ViewSystem.Views
             scoreText.text = score.ToString();
         }
 
+        public void SetScore(int score)
+        {
+            scoreText.text = score.ToString();
+        }
+
+        public void SetHealth(int score)
+        {
+            lifesText.text = score.ToString();
+        }
+
         private void OnDisable()
         {
             weaponButtons.ForEach(b => b.OnClick -= onWeaponChange);
+        }
+
+        public void Close()
+        {
+            Close();
         }
     }
 }

@@ -11,17 +11,37 @@ namespace ViewSystem.Presenters
 {
     public class GameViewPresenter : Presenter
     {
-        private Player player;
+        private GameView view;
+
+        private int playerHealth;
+        private int playerScore;
 
         public GameViewPresenter(View view, Player player) : base(view)
         {
             Debug.Log($"From {GetType()}::: This is my view:{View.GetType()}");
-            this.player = player;
+            view = ((GameView)View);
         }
         public override void Init(Action onClose)
         {
-            ((GameView)View).SetValues((int)player.Health, 0);
             base.Init(onClose);
+        }
+
+        public void SetValues(int health, int score)
+        {
+            playerHealth = health;
+            playerScore = score;
+            view.SetValues(health, score);
+        }
+
+        public void OnPlayerGetDamage(float damage)
+        {
+            playerHealth -= (int)damage;
+            view.SetHealth(playerHealth);
+        }
+
+        public void OnPlayerDead()
+        {
+            view.Close();
         }
     }
 }

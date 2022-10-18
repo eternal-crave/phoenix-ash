@@ -36,6 +36,7 @@ namespace Units
                 return;
             }
             OnDead?.Invoke();
+            Deactivate();
         }
 
         public void Init(GameplayInput gameplayInput)
@@ -76,6 +77,18 @@ namespace Units
         private void OnDisable()
         {
             gameplayInput.OnPlayerInput -= OnUserInputHandler;
+            OnGetDamage = null;
+            OnDead = null;
+        }
+
+        public void Activate()
+        {
+            gameObject.SetActive(true);
+        }
+        
+        private void Deactivate()
+        {
+            gameObject.SetActive(false);
         }
 
         private void Update()

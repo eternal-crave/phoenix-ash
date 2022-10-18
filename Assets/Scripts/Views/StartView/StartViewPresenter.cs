@@ -11,22 +11,24 @@ namespace ViewSystem.Presenters
 {
     public class StartViewPresenter : Presenter
     {
-        private PPSaveSystem saveSystem;
-        public StartViewPresenter(View view, PPSaveSystem saveSystem) : base(view)
+
+        public StartViewPresenter(View view) : base(view)
         {
             Debug.Log($"From {GetType()}::: This is my view:{View.GetType()}");
-            this.saveSystem = saveSystem;
         }
+
       
         public override void Init(Action onClose)
         {
             base.Init(onClose);
-            ((StartView)View).SetHighScoreText(GetHighScore());
+            
         }
 
-        private int GetHighScore()
+        public void SetHighScore(int highScore)
         {
-            return saveSystem.Load().Highscore;
+            ((StartView)View).SetHighScoreText(highScore);
         }
+
+        
     }
 }

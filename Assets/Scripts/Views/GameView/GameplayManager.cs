@@ -18,7 +18,7 @@ namespace ViewSystem.Views
 
         public GameplayInput GameplayInput => gameplayInput;
 
-        private Player GetPlayer()
+        public Player GetPlayer()
         {
             return player;
         }
@@ -29,8 +29,13 @@ namespace ViewSystem.Views
             this.gameplayInput = gameplayInput;
             this.player = player;
             this.weaponManager = weaponManager;
-            this.player.Init(gameplayInput);
-            this.player.SetWeapon(this.weaponManager.GetWeapon<SemiCircleWeapon>()); // FORTEST
+            
+        }
+
+        public void StartGame()
+        {
+            player.Init(gameplayInput);
+            player.Activate();
         }
     }
 }

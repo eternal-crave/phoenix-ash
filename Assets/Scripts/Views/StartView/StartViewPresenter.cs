@@ -18,9 +18,12 @@ namespace ViewSystem.Presenters
         public override void Init(Action onClose)
         {
             base.Init(onClose);
+            ((StartView)View).SetHighScoreText(GetHighScore());
         }
 
-
-       
+        private int GetHighScore()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

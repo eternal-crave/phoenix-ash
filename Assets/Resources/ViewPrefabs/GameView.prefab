@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 714474500}
   - component: {fileID: 714474499}
   - component: {fileID: 714474502}
+  - component: {fileID: 2970537851586439356}
   m_Layer: 5
   m_Name: FirstWeapon
   m_TagString: Untagged
@@ -169,10 +170,10 @@ RectTransform:
   m_Father: {fileID: 853413737}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 111.446594, y: -95.435}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &714474501
 CanvasRenderer:
@@ -276,6 +277,20 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &2970537851586439356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714474497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 348228541b240aa40bf5b0cfb4d45809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 714474499}
+  weaponType: 0
 --- !u!1 &745810150
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,8 +304,9 @@ GameObject:
   - component: {fileID: 745810153}
   - component: {fileID: 745810152}
   - component: {fileID: 745810155}
+  - component: {fileID: 5181649436408059516}
   m_Layer: 5
-  m_Name: ThirdWeapon (2)
+  m_Name: ThirdWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,10 +327,10 @@ RectTransform:
   m_Father: {fileID: 853413737}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 111.446594, y: -475.435}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &745810154
 CanvasRenderer:
@@ -418,6 +434,20 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &5181649436408059516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745810150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 348228541b240aa40bf5b0cfb4d45809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 745810152}
+  weaponType: 1
 --- !u!1 &853413736
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,6 +796,7 @@ GameObject:
   - component: {fileID: 1201374568}
   - component: {fileID: 1201374567}
   - component: {fileID: 1201374570}
+  - component: {fileID: 5045930661055038580}
   m_Layer: 5
   m_Name: SecondWeapon (1)
   m_TagString: Untagged
@@ -788,10 +819,10 @@ RectTransform:
   m_Father: {fileID: 853413737}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 111.446594, y: -285.435}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1201374569
 CanvasRenderer:
@@ -895,6 +926,20 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &5045930661055038580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201374565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 348228541b240aa40bf5b0cfb4d45809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1201374567}
+  weaponType: 2
 --- !u!1 &1455542710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,7 +1090,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8224825580031123950
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1080,6 +1125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 246570570b87cae4ca8bb4f53ebc75a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifesText: {fileID: 687980568}
+  scoreText: {fileID: 8224825580073000125}
+  weaponButtons: []
 --- !u!1 &8224825580073000127
 GameObject:
   m_ObjectHideFlags: 0

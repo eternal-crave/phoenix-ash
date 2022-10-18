@@ -5,14 +5,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using ViewSystem.Views;
+using Core.SaveSystem.PlayerPrefsSaveSystem;
 
 namespace ViewSystem.Presenters
 {
     public class StartViewPresenter : Presenter
     {
-        public StartViewPresenter(View view) : base(view)
+        private PPSaveSystem saveSystem;
+        public StartViewPresenter(View view, PPSaveSystem saveSystem) : base(view)
         {
             Debug.Log($"From {GetType()}::: This is my view:{View.GetType()}");
+            this.saveSystem = saveSystem;
         }
       
         public override void Init(Action onClose)
@@ -23,7 +26,7 @@ namespace ViewSystem.Presenters
 
         private int GetHighScore()
         {
-            throw new NotImplementedException();
+            return saveSystem.Load().Highscore;
         }
     }
 }

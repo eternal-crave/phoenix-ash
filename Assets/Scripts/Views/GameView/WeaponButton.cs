@@ -12,7 +12,7 @@ namespace Views.GameView
     [RequireComponent(typeof(Button))]
     public class WeaponButton : MonoBehaviour
     {
-        public event Func<WeaponType> OnClick;
+        public event Action<WeaponType> OnClick;
 
         [SerializeField] private Button button;
         [SerializeField] private WeaponType weaponType;
@@ -34,7 +34,7 @@ namespace Views.GameView
 
         private void OnButtonClick()
         {
-            OnClick?.Invoke();
+            OnClick?.Invoke(weaponType);
         }
     }
 }

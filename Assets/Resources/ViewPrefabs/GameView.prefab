@@ -1127,7 +1127,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifesText: {fileID: 687980568}
   scoreText: {fileID: 8224825580073000125}
-  weaponButtons: []
+  weaponButtons:
+  - {fileID: 2970537851586439356}
+  - {fileID: 5045930661055038580}
+  - {fileID: 5181649436408059516}
 --- !u!1 &8224825580073000127
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,11 +6,14 @@ using UnityEngine;
 using Zenject;
 using ViewSystem.Views;
 using Units;
+using Weapons;
 
 namespace ViewSystem.Presenters
 {
     public class GameViewPresenter : Presenter
     {
+        public Action<WeaponType> OnWeaponChange;
+
         private GameView view;
 
         private int playerHealth;
@@ -19,8 +22,15 @@ namespace ViewSystem.Presenters
         public GameViewPresenter(View view, Player player) : base(view)
         {
             Debug.Log($"From {GetType()}::: This is my view:{View.GetType()}");
-            view = ((GameView)View);
+            this.view = (GameView)view;
+            this.view.OnWeaponChange += WeaponChangeInput;
         }
+
+        private void WeaponChangeInput(WeaponType obj)
+        {
+            OnWeaponChange?.Invoke(obj);
+        }
+
         public override void Init(Action onClose)
         {
             base.Init(onClose);
@@ -41,7 +51,8 @@ namespace ViewSystem.Presenters
 
         public void OnPlayerDead()
         {
-            view.Close();
+            view.CloseView();
+            this.view.OnWeaponChange -= WeaponChangeInput;
         }
     }
 }

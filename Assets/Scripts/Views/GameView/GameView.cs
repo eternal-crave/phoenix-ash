@@ -13,7 +13,7 @@ namespace ViewSystem.Views
 {
     public class GameView : View
     {
-        Func<WeaponType> onWeaponChange;
+        public Action<WeaponType> OnWeaponChange;
 
         [SerializeField] private TMP_Text lifesText;
         [SerializeField] private TMP_Text scoreText;
@@ -22,7 +22,12 @@ namespace ViewSystem.Views
 
         private void OnEnable()
         {
-            weaponButtons.ForEach(b => b.OnClick += onWeaponChange);
+            weaponButtons.ForEach(b => b.OnClick += WeaponChangeInput);
+        }
+
+        private void WeaponChangeInput(WeaponType obj)
+        {
+            OnWeaponChange?.Invoke(obj);
         }
 
         public override void Init(Action onClose)
@@ -48,12 +53,12 @@ namespace ViewSystem.Views
 
         private void OnDisable()
         {
-            weaponButtons.ForEach(b => b.OnClick -= onWeaponChange);
+            weaponButtons.ForEach(b => b.OnClick -= WeaponChangeInput);
         }
 
-        public void Close()
+        public void CloseView()
         {
-            Close();
+            CloseView();
         }
     }
 }

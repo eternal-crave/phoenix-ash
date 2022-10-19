@@ -47,6 +47,7 @@ namespace Units
         public void SetWeapon(Weapon weapon)
         {
             this.weapon = weapon;
+            Debug.Log(weapon.GetType());
         }
 
         private void OnUserInputHandler(Vector3 position)

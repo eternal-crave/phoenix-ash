@@ -5,24 +5,29 @@ using Units;
 using UnityEngine;
 using ViewSystem.Presenters;
 using ViewSystem.Views;
+using Weapons;
 
 namespace GameFlow
 {
     public class GameFlow
     {
+        public event Action<WeaponType> OnWeaponChange;
+
         private ViewManager viewManager;
         private Player player;
         private PPSaveSystem saveSystem;
-        private GameplayManager gameplayManager;
+
 
         public event Action OnGameStart;
+        public event  Action OnEndGame;
 
-        public GameFlow(ViewManager viewManager, PPSaveSystem saveSystem, GameplayManager gameplayManager)
+
+
+        public GameFlow(ViewManager viewManager, PPSaveSystem saveSystem, Player player)
         {
             this.viewManager = viewManager;
-            this.saveSystem = saveSystem;   
-            this.gameplayManager = gameplayManager;
-            player = gameplayManager.GetPlayer();
+            this.saveSystem = saveSystem;  
+            this.player = player;
         }
 
         public void StartGameFlow()
@@ -43,7 +48,19 @@ namespace GameFlow
             presenter.SetValues((int)player.Health, 0);
             player.OnGetDamage += presenter.OnPlayerGetDamage;
             player.OnDead += presenter.OnPlayerDead;
-            presenter.Init(OpenGameOverScreen);
+            presenter.OnWeaponChange += OnWeaponChangeInput;
+            presenter.Init(() =>
+            {
+                presenter.OnWeaponChange -= OnWeaponChangeInput;
+                OpenGameOverScreen();
+                OnEndGame?.Invoke();
+            });
+            OnGameStart.Invoke();
+        }
+
+        private void OnWeaponChangeInput(WeaponType obj)
+        {
+            OnWeaponChange?.Invoke(obj);
         }
 
         private void OpenGameOverScreen()

@@ -25,7 +25,6 @@ namespace ViewSystem.Presenters
         {
             Debug.Log($"From {GetType()}::: This is my view:{View.GetType()}");
             this.view = (GameView)view;
-            this.view.OnWeaponChange += WeaponChangeInput;
         }
 
         private void WeaponChangeInput(WeaponType obj)
@@ -36,6 +35,7 @@ namespace ViewSystem.Presenters
         public override void Init(Action onClose)
         {
             base.Init(onClose);
+            this.view.OnWeaponChange += WeaponChangeInput;
         }
 
         public void SetValues(int health, int score)

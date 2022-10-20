@@ -16,10 +16,14 @@ namespace GameFlow
         private ViewManager viewManager;
         private Player player;
         private PPSaveSystem saveSystem;
+        
+        private int playerHighscore;
+        private int playerCurrentscore;
 
 
         public event Action OnGameStart;
-        public event  Action OnEndGame;
+        public event Action OnEndGame;
+        public event Action<int> OnPlayerScoreChange;
 
 
 
@@ -38,7 +42,8 @@ namespace GameFlow
         private void OpenStartView()
         {
             StartViewPresenter presenter = viewManager.OpenView<StartView, StartViewPresenter>();
-            presenter.SetHighScore((int)LoadHighScore());
+            playerHighscore = LoadHighScore();
+            presenter.SetHighScore(playerHighscore);
             presenter.Init(OpenGameView);
         }
 
@@ -49,29 +54,61 @@ namespace GameFlow
             player.OnGetDamage += presenter.OnPlayerGetDamage;
             player.OnDead += presenter.OnPlayerDead;
             presenter.OnWeaponChange += OnWeaponChangeInput;
+            OnPlayerScoreChange += presenter.SetScore;
             presenter.Init(() =>
             {
                 presenter.OnWeaponChange -= OnWeaponChangeInput;
+                OnPlayerScoreChange -= presenter.SetScore;
+                SaveHighScore(presenter.PlayerScore);
                 OpenGameOverScreen();
                 OnEndGame?.Invoke();
             });
             OnGameStart.Invoke();
         }
 
+        private void OpenGameOverScreen()
+        {
+            GameOverViewPresenter presenter = viewManager.OpenView<GameOverView, GameOverViewPresenter>();
+            presenter.SetPlayerScores(playerCurrentscore, playerHighscore);
+            presenter.OnRestartButtonClick += OpenGameView;
+            presenter.OnHomeButtonClick += OpenStartView;
+            presenter?.Init(() =>
+            {
+                presenter.OnRestartButtonClick -= OpenGameView;
+                presenter.OnHomeButtonClick -= OpenStartView;
+            });
+        }
+
+
+
         private void OnWeaponChangeInput(WeaponType obj)
         {
             OnWeaponChange?.Invoke(obj);
         }
 
-        private void OpenGameOverScreen()
-        {
-            GameOverViewPresenter presenter = viewManager.OpenView<GameOverView, GameOverViewPresenter>();
-            presenter?.Init(null);
-        }
+        
 
-        private float LoadHighScore()
+        private int LoadHighScore()
         {
             return saveSystem.Load().Highscore;
         }
+
+        private void SaveHighScore(int playerScore)
+        {
+            if (playerHighscore >= playerScore)
+            {
+                return;
+            }
+            saveSystem.Save(new PPSaveSystemData() { Highscore = playerScore });
+        }
+
+
+        public void OnScoreChange(int score)
+        {
+            playerCurrentscore = score;
+            OnPlayerScoreChange?.Invoke(score);
+        }
+
+
     }
 }

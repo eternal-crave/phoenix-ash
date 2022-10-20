@@ -86,10 +86,16 @@ namespace Units
         {
             gameObject.SetActive(true);
         }
+
+        private void ResetHealth()
+        {
+            health = maxHealth;
+        }
         
         private void Deactivate()
         {
             gameObject.SetActive(false);
+            ResetHealth();
         }
 
         private void Update()
@@ -99,7 +105,6 @@ namespace Units
             Debug.DrawRay(bulletSpawnPoint.position, lookDirection, Color.red); //TODO DELETE AFTER
             if (hit.collider != null && hit.transform.TryGetComponent(out Unit enemy))
             {
-                Debug.Log("DETECTION");
                 Attack(lookDirection);
             }
         }

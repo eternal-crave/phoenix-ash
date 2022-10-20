@@ -58,7 +58,7 @@ namespace ViewSystem.Views
 
         public void CloseView()
         {
-            CloseView();
+            Close();
         }
     }
 }

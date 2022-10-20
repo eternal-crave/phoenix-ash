@@ -16,6 +16,8 @@ namespace Installers
         {
             RegisterView<StartView, StartViewPresenter>();
             RegisterView<GameView, GameViewPresenter>();
+            RegisterView<GameOverView, GameOverViewPresenter>();
+
         }
 
         private void RegisterView<V, P>() where V : View, new() where P : Presenter

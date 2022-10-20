@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 593411175}
   - component: {fileID: 593411174}
   m_Layer: 5
-  m_Name: HighscoreText (1)
+  m_Name: HighscoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -634,6 +634,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71252b133fe69814596e608b1582847d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HighScoreText: {fileID: 593411174}
+  LastScoreText: {fileID: 1620527463}
+  homeButton: {fileID: 2502540492511350575}
+  restartButton: {fileID: 997945182721147846}
 --- !u!1 &8224825580073000127
 GameObject:
   m_ObjectHideFlags: 0

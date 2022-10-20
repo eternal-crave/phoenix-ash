@@ -741,6 +741,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1886779431}
     m_Modifications:
+    - target: {fileID: 1142089605663848675, guid: 3cff7453c63188742815a3408eca62f6, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5957870015623543883, guid: 3cff7453c63188742815a3408eca62f6, type: 3}
       propertyPath: m_Name
       value: DeathZone

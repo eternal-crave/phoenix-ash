@@ -90,7 +90,6 @@ namespace Units
         {
             while (true)
             {
-                Debug.Log("MOVING");
                 gameObject.transform.position = Vector3.Lerp(transform.position, targetPos, speed/100 * Time.deltaTime);
                 yield return null;
             }

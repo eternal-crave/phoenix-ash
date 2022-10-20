@@ -19,6 +19,8 @@ namespace ViewSystem.Presenters
         private int playerHealth;
         private int playerScore;
 
+        public int PlayerScore => playerScore;
+
         public GameViewPresenter(View view, Player player) : base(view)
         {
             Debug.Log($"From {GetType()}::: This is my view:{View.GetType()}");
@@ -53,6 +55,12 @@ namespace ViewSystem.Presenters
         {
             view.CloseView();
             this.view.OnWeaponChange -= WeaponChangeInput;
+        }
+
+        public void SetScore(int score)
+        {
+            playerScore = score;
+            view.SetScore(score);
         }
     }
 }

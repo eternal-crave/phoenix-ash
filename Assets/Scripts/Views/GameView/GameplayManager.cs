@@ -39,6 +39,8 @@ namespace ViewSystem.Views
             this.player = player;
             this.weaponManager = weaponManager;
             this.gameFlow = gameFlow;
+
+            // Without unsubscribtion, cuz subsrcribtion happens only once
             gameFlow.OnGameStart += StartGame;
             gameFlow.OnEndGame += StopGame;
             gameFlow.OnWeaponChange += ChangeWeapon;
@@ -75,11 +77,7 @@ namespace ViewSystem.Views
 
         public void StopGame()
         {
-           /* gameFlow.OnGameStart -= StartGame;
-            gameFlow.OnEndGame -= StopGame;
-            gameFlow.OnWeaponChange -= ChangeWeapon;*/
             OnScoreChange -= gameFlow.OnScoreChange;
-            //throw new NotImplementedException();
         }
 
 

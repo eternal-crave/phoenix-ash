@@ -31,7 +31,6 @@ namespace Weapons
 
         public List<Bullet> PlaceBullets(Vector3 origin, int amount, float rotationOffset)
         {
-            Debug.Log(rotationOffset);
             List<Bullet> result = new List<Bullet>();
             float radianStep = (((225/*+rotationOffset*/) / amount)) * Mathf.PI / 180;
             //radianStep += offsetAngle * Mathf.PI / 180;

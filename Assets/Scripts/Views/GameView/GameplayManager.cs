@@ -75,7 +75,7 @@ namespace ViewSystem.Views.Gameplay
                 Enemy enemy = poolManager.Get<Enemy>();
                 enemy.OnDead += AddScore;
                 enemy.Init(Vector3.zero, player.transform.position);
-                await Task.Delay(TimeSpan.FromSeconds(enemyCreationInterval).Milliseconds);
+                await Task.Delay(TimeSpan.FromSeconds(enemyCreationInterval));
             }
         }
 

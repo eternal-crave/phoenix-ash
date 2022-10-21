@@ -61,5 +61,12 @@ namespace Core.PoolSystem
             instance.OnDeactivation += InstertIntoPassivePool;
             return instance;
         }
+
+        public void DeactivateAllInstances()
+        {
+            List<T> list = activeObjectPool.ToList();
+            list.ForEach(o => o.Deactivate());
+
+        }
     }
 }

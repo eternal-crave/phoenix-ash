@@ -3,10 +3,10 @@ using Core.Factory;
 using Core.PoolSystem;
 using Core.SaveSystem.PlayerPrefsSaveSystem;
 using GameFlow.Managers;
-using System;
 using Units;
 using UnityEngine;
 using ViewSystem.Views;
+using ViewSystem.Views.Gameplay;
 using Weapons;
 using Zenject;
 

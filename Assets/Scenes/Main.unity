@@ -183,6 +183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0783fc5b61af5429e351e9546d0f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointsForEnemyKill: 2
+  enemyCreationInterval: 5
+  defaultPlayerWeapon: 1
 --- !u!4 &318680286
 Transform:
   m_ObjectHideFlags: 0

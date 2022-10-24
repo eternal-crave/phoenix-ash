@@ -19,7 +19,7 @@ namespace Weapons
                 return;
             }
 
-            await test(() =>
+            await Shoot(() =>
             {
                 Bullet bullet = GetAmmo();
                 bullet.Activate();
@@ -28,7 +28,7 @@ namespace Weapons
             });
         }
 
-        private async Task test(Action callback)
+        private async Task Shoot(Action callback)
         {
             for (int i = 0; i < count; i++)
             {

@@ -1,6 +1,7 @@
 using Core.PoolSystem;
 using GameFlow.Managers;
 using System;
+using Random = UnityEngine.Random;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -20,12 +21,13 @@ namespace ViewSystem.Views.Gameplay
         private GameplayInput gameplayInput;
         private WeaponManager weaponManager;
         private GameFlow.GameFlow gameFlow;
+
         private bool gameIsRunning;
         private int score = 0;
         private int pointsForEnemyKill;
         private float enemyCreationInterval;
         private WeaponType defaultPlayerWeapon;
-
+        private float creationOffsetFromEdges;
 
         public GameplayInput GameplayInput => gameplayInput;
 
@@ -34,11 +36,12 @@ namespace ViewSystem.Views.Gameplay
             return player;
         }
 
-        public void SetInitialValues(int pointsForEnemyKill, float enemyCreationInterval, WeaponType defaultPlayerWeapon)
+        public void SetInitialValues(int pointsForEnemyKill, float enemyCreationInterval, WeaponType defaultPlayerWeapon, float enemyBoxAreaOffset)
         {
             this.pointsForEnemyKill = pointsForEnemyKill;
             this.enemyCreationInterval = enemyCreationInterval;
             this.defaultPlayerWeapon = defaultPlayerWeapon;
+            this.creationOffsetFromEdges = enemyBoxAreaOffset;
         }
 
         public GameplayManager(PoolManager poolManager, Player player, 
@@ -61,7 +64,7 @@ namespace ViewSystem.Views.Gameplay
 
             player.Init(gameplayInput);
             player.Activate();
-            ChangeWeapon(defaultPlayerWeapon); // default weapon
+            ChangeWeapon(defaultPlayerWeapon);
             gameIsRunning = true;
             StartEnemyCreation();
             OnScoreChange += gameFlow.OnScoreChange;
@@ -74,7 +77,7 @@ namespace ViewSystem.Views.Gameplay
             {
                 Enemy enemy = poolManager.Get<Enemy>();
                 enemy.OnDead += AddScore;
-                enemy.Init(Vector3.zero, player.transform.position);
+                enemy.Init(GetEnemyCreationPoint(creationOffsetFromEdges), player.transform.position);
                 await Task.Delay(TimeSpan.FromSeconds(enemyCreationInterval));
             }
         }
@@ -112,6 +115,27 @@ namespace ViewSystem.Views.Gameplay
 
             weapon.Init(poolManager.GetPool<Bullet>());
             player.SetWeapon(weapon);
+        }
+
+        private Vector3 GetRandomVector3Range(Vector3 minPosition, Vector3 maxPosition)
+        {
+            return new Vector3(Random.Range(minPosition.x, maxPosition.x), Random.Range(minPosition.y, maxPosition.y), Random.Range(minPosition.z, maxPosition.z));
+        }
+
+        private Vector3 GetEnemyCreationPoint(float creationOffsetFromEdges)
+        {
+            Vector3 upperRight = new Vector3(Screen.width, Screen.height, 0);
+            Vector3 lowerLeft = Vector3.zero;
+
+            Vector3 horizontalMin = Camera.main.ScreenToWorldPoint(new Vector3(lowerLeft.x + creationOffsetFromEdges, upperRight.y / 2, 0));
+            Vector3 horizontalMax = Camera.main.ScreenToWorldPoint(new Vector3(upperRight.x - creationOffsetFromEdges, upperRight.y / 2, 0));
+
+            Vector3 verticalMin = Camera.main.ScreenToWorldPoint(new Vector3(((upperRight - lowerLeft) / 2).x, upperRight.y / 2, 0));
+            Vector3 verticalMax = Camera.main.ScreenToWorldPoint(new Vector3(((upperRight - lowerLeft) / 2).x, upperRight.y - creationOffsetFromEdges, 0));
+
+            return GetRandomVector3Range(GetRandomVector3Range(horizontalMin, horizontalMax),
+                GetRandomVector3Range(verticalMin, verticalMax));
+
         }
     }
 }

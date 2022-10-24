@@ -1,5 +1,4 @@
 ﻿using GameFlow;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +13,14 @@ namespace GameFlow.Managers
 {
     public class GameManager : MonoBehaviour
     {
+        [Header("Player")]
+        [SerializeField] private WeaponType defaultPlayerWeapon = WeaponType.Single;
+
+        [Header("Enemies")]
         [SerializeField] private int pointsForEnemyKill = 1;
         [SerializeField] private float enemyCreationInterval = 2;
-        [SerializeField] private WeaponType defaultPlayerWeapon = WeaponType.Single;
+        [SerializeField] private float creationOffsetFromEdges = 100f;
+
         private GameplayManager gameplayManager;
         private GameFlow gameFlow;
 
@@ -28,7 +32,7 @@ namespace GameFlow.Managers
         }
         private void Start()
         {
-            gameplayManager.SetInitialValues(pointsForEnemyKill, enemyCreationInterval, defaultPlayerWeapon);
+            gameplayManager.SetInitialValues(pointsForEnemyKill, enemyCreationInterval, defaultPlayerWeapon, creationOffsetFromEdges);
             gameFlow.StartGameFlow();
         }
     }

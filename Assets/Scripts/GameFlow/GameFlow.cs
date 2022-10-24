@@ -53,6 +53,8 @@ namespace GameFlow
             GameViewPresenter presenter = viewManager.OpenView<GameView, GameViewPresenter>();
             presenter.SetValues((int)player.Health, 0);
             presenter.ResetWeapons(defaultPlayerWeapon);
+
+            ResetPlayerScore();
             player.OnGetDamage += presenter.OnPlayerGetDamage;
             player.OnDead += presenter.OnPlayerDead;
             presenter.OnWeaponChange += OnWeaponChangeInput;
@@ -70,10 +72,15 @@ namespace GameFlow
             OnGameStart.Invoke();
         }
 
+        private void ResetPlayerScore()
+        {
+            playerCurrentscore = 0;
+        }
+
         private void OpenGameOverScreen()
         {
             GameOverViewPresenter presenter = viewManager.OpenView<GameOverView, GameOverViewPresenter>();
-            presenter.SetPlayerScores(playerCurrentscore, playerHighscore);
+            presenter.SetPlayerScores(playerCurrentscore, LoadHighScore());
             presenter.OnRestartButtonClick += OpenGameView;
             presenter.OnHomeButtonClick += OpenStartView;
             presenter?.Init(() =>

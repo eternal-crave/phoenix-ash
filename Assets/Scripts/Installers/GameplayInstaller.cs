@@ -35,7 +35,7 @@ namespace Installers
         {
             Container.Bind<Weapon>().To<SingleWeapon>().AsSingle();
             Container.Bind<Weapon>().To<QueueWeapon>().AsSingle();
-            Container.Bind<Weapon>().To<SemiCircleWeapon>().AsSingle();
+            Container.Bind<Weapon>().To<ShotGunWeapon>().AsSingle();
         }
 
         private void BindFactories()

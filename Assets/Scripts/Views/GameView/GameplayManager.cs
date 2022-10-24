@@ -118,8 +118,8 @@ namespace ViewSystem.Views.Gameplay
             Weapon weapon;
             switch (type)
             {
-                case WeaponType.SemiCirclce:
-                    weapon = weaponManager.GetWeapon<SemiCircleWeapon>();
+                case WeaponType.ShotGun:
+                    weapon = weaponManager.GetWeapon<ShotGunWeapon>();
                     break;
                 case WeaponType.Queue:
                     weapon = weaponManager.GetWeapon<QueueWeapon>();

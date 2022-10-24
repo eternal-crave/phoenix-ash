@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Weapons
 {
     [CreateAssetMenu(fileName = "SemiCircleWeapon", menuName = "Weapons/SemiCircleWeapon")]
-    public class SemiCircleWeapon : Weapon
+    public class ShotGunWeapon : Weapon
     {
         [SerializeField] private float offset;
         [SerializeField] private float step;

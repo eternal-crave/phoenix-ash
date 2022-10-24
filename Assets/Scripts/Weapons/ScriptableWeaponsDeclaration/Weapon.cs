@@ -48,7 +48,7 @@ namespace Weapons
     public enum WeaponType
     {
         Single,
-        SemiCirclce,
+        ShotGun,
         Queue,
     }
 }

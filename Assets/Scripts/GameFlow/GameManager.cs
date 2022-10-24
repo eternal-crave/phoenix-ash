@@ -15,7 +15,7 @@ namespace GameFlow.Managers
     public class GameManager : MonoBehaviour
     {
         [Header("Player")]
-        [SerializeField] private WeaponType defaultPlayerWeapon = WeaponType.Single;
+        [SerializeField] private WeaponType defaultPlayerWeapon;
 
         [Header("Enemies")]
         [SerializeField] private int pointsForEnemyKill = 1;

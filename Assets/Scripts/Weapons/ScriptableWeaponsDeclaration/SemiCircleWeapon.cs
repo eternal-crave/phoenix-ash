@@ -8,9 +8,9 @@ namespace Weapons
     [CreateAssetMenu(fileName = "SemiCircleWeapon", menuName = "Weapons/SemiCircleWeapon")]
     public class SemiCircleWeapon : Weapon
     {
-        [SerializeField] private float radius;
+        [SerializeField] private float offset;
+        [SerializeField] private float step;
         [SerializeField] private int amountOfBullets;
-        [SerializeField] private float offsetAngle;
         public override void Shoot(Vector3 origin, Quaternion rotation, Vector3 direction)
         {
             //Fire rate
@@ -20,32 +20,16 @@ namespace Weapons
             }
 
 
-            //Bullets setup to shoot to the FUCKIN LEPRIKONS
-            foreach (Bullet bullet in PlaceBullets(origin, amountOfBullets, rotation.eulerAngles.z))
+            for(int i = -(amountOfBullets/2); i < amountOfBullets/2; i++)
             {
-                Vector3 relativePos = bullet.transform.position - origin;
-                bullet.Activate();
-                bullet.SetForce(relativePos + (bulletSpeed * direction));
-            }
-        }
-
-        public List<Bullet> PlaceBullets(Vector3 origin, int amount, float rotationOffset)
-        {
-            List<Bullet> result = new List<Bullet>();
-            float radianStep = (((225/*+rotationOffset*/) / amount)) * Mathf.PI / 180;
-            //radianStep += offsetAngle * Mathf.PI / 180;
-            for (int i = 1; i <= amount; i++)
-            {
-                float angle = i * radianStep;
-                
+                float localStep = i * step;
                 Bullet bullet = GetAmmo();
-                bullet.transform.position = origin + new Vector3(Mathf.Cos(angle) * radius
-                    , Mathf.Sin(angle) * radius, 0);
-                result.Add(bullet);
+                bullet.Activate();
+                bullet.transform.position = new Vector3(origin.x + localStep, origin.y, 0);
+                bullet.SetForce(bulletSpeed * direction);
             }
-
-            return result;
-
         }
+
+        
     }
 }

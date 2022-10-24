@@ -102,7 +102,6 @@ namespace Units
         {
             Vector2 lookDirection = bulletSpawnPoint.transform.position- transform.position;
             RaycastHit2D hit = Physics2D.Raycast(bulletSpawnPoint.position, lookDirection,float.MaxValue);
-            Debug.DrawRay(bulletSpawnPoint.position, lookDirection, Color.red); //TODO DELETE AFTER
             if (hit.collider != null && hit.transform.TryGetComponent(out Unit enemy))
             {
                 Attack(lookDirection);

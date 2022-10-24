@@ -52,6 +52,7 @@ namespace ViewSystem.Views.Gameplay
             this.enemyCreationInterval = enemyCreationInterval;
             this.defaultPlayerWeapon = defaultPlayerWeapon;
             this.creationOffsetFromEdges = enemyBoxAreaOffset;
+            gameFlow.SetDeafultWeapon(defaultPlayerWeapon);
         }
 
         public GameplayManager(PoolManager poolManager, Player player, 
@@ -76,16 +77,10 @@ namespace ViewSystem.Views.Gameplay
 
             player.Init(gameplayInput);
             player.Activate();
-            InitWeapons();
+            ChangeWeapon(defaultPlayerWeapon);
             gameIsRunning = true;
             StartEnemyCreation();
             OnScoreChange += gameFlow.OnScoreChange;
-        }
-
-        private void InitWeapons()
-        {
-            gameFlow.SetDeafultWeapon(defaultPlayerWeapon);
-            ChangeWeapon(defaultPlayerWeapon);
         }
 
         public void StopGame()

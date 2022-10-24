@@ -1,4 +1,5 @@
 ﻿using GameFlow;
+using GameplayLogicProcessor;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,9 @@ namespace GameFlow.Managers
         [SerializeField] private float enemyCreationInterval = 2;
         [SerializeField] private float creationOffsetFromEdges = 100f;
 
+        [Header("Gameplay Logic")]
+        [SerializeField] private GameplayProcessor gameplayProcessor;
+
         private GameplayManager gameplayManager;
         private GameFlow gameFlow;
 
@@ -32,6 +36,7 @@ namespace GameFlow.Managers
         }
         private void Start()
         {
+            gameplayManager.SetGamePlayProcessorLogic(gameplayProcessor);
             gameplayManager.SetInitialValues(pointsForEnemyKill, enemyCreationInterval, defaultPlayerWeapon, creationOffsetFromEdges);
             gameFlow.StartGameFlow();
         }

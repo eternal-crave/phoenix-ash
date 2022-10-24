@@ -62,5 +62,10 @@ namespace ViewSystem.Presenters
             playerScore = score;
             view.SetScore(score);
         }
+
+        public void UnlockWeapon(WeaponType weaponType)
+        {
+            view.UnlockWeapon(weaponType);
+        }
     }
 }

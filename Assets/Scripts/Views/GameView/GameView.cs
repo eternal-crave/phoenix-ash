@@ -1,6 +1,7 @@
 using Core.ViewSystem.Core;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Units;
 using UnityEngine;
@@ -24,6 +25,8 @@ namespace ViewSystem.Views
         {
             weaponButtons.ForEach(b => b.OnClick += WeaponChangeInput);
         }
+
+        
 
         private void WeaponChangeInput(WeaponType obj)
         {
@@ -59,6 +62,11 @@ namespace ViewSystem.Views
         public void CloseView()
         {
             Close();
+        }
+
+        public void UnlockWeapon(WeaponType weaponType)
+        {
+            weaponButtons.FirstOrDefault((b) => b.WeaponType == weaponType).Activate();
         }
     }
 }

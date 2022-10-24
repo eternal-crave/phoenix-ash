@@ -311,7 +311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &745810151
 RectTransform:
   m_ObjectHideFlags: 0
@@ -798,12 +798,12 @@ GameObject:
   - component: {fileID: 1201374570}
   - component: {fileID: 5045930661055038580}
   m_Layer: 5
-  m_Name: SecondWeapon (1)
+  m_Name: SecondWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1201374566
 RectTransform:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ namespace GameFlow
     public class GameFlow
     {
         public event Action<WeaponType> OnWeaponChange;
+        public event Action<WeaponType> OnWeaponGain;
 
         private ViewManager viewManager;
         private Player player;
@@ -55,10 +56,12 @@ namespace GameFlow
             player.OnDead += presenter.OnPlayerDead;
             presenter.OnWeaponChange += OnWeaponChangeInput;
             OnPlayerScoreChange += presenter.SetScore;
+            OnWeaponGain += presenter.UnlockWeapon;
             presenter.Init(() =>
             {
                 presenter.OnWeaponChange -= OnWeaponChangeInput;
                 OnPlayerScoreChange -= presenter.SetScore;
+                OnWeaponGain -= presenter.UnlockWeapon;
                 SaveHighScore(presenter.PlayerScore);
                 OpenGameOverScreen();
                 OnEndGame?.Invoke();
@@ -79,7 +82,10 @@ namespace GameFlow
             });
         }
 
-
+        public void GainWeapon(WeaponType weaponType)
+        {
+            OnWeaponGain?.Invoke(weaponType);
+        }
 
         private void OnWeaponChangeInput(WeaponType obj)
         {

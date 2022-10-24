@@ -187,6 +187,7 @@ MonoBehaviour:
   pointsForEnemyKill: 1
   enemyCreationInterval: 3
   creationOffsetFromEdges: 100
+  gameplayProcessor: {fileID: 11400000, guid: f3283f6da44fa6c4e960cf83a528a98c, type: 2}
 --- !u!4 &318680286
 Transform:
   m_ObjectHideFlags: 0

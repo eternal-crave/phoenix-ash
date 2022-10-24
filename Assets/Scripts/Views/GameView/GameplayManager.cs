@@ -9,6 +9,7 @@ using Units;
 using UnityEngine;
 using Weapons;
 using Zenject;
+using GameplayLogicProcessor;
 
 namespace ViewSystem.Views.Gameplay
 {
@@ -28,12 +29,21 @@ namespace ViewSystem.Views.Gameplay
         private float enemyCreationInterval;
         private WeaponType defaultPlayerWeapon;
         private float creationOffsetFromEdges;
+        private GameplayProcessor gameplayProcessor;
 
         public GameplayInput GameplayInput => gameplayInput;
 
         public Player GetPlayer()
         {
             return player;
+        }
+
+        public void SetGamePlayProcessorLogic(GameplayProcessor gameplayProcessor)
+        {
+            this.gameplayProcessor = gameplayProcessor;
+
+            // Without unsubscribtion, cuz subsrcribtion happens only once
+            gameplayProcessor.OnNewWeaponGain += gameFlow.GainWeapon;
         }
 
         public void SetInitialValues(int pointsForEnemyKill, float enemyCreationInterval, WeaponType defaultPlayerWeapon, float enemyBoxAreaOffset)
@@ -59,16 +69,31 @@ namespace ViewSystem.Views.Gameplay
             gameFlow.OnWeaponChange += ChangeWeapon;
         }
 
+        
+
         public void StartGame()
         {
 
             player.Init(gameplayInput);
             player.Activate();
-            ChangeWeapon(defaultPlayerWeapon);
+            InitWeapons();
             gameIsRunning = true;
             StartEnemyCreation();
             OnScoreChange += gameFlow.OnScoreChange;
+        }
 
+        private void InitWeapons()
+        {
+            ChangeWeapon(defaultPlayerWeapon);
+            //DeactivateWeapons();  
+        }
+
+        public void StopGame()
+        {
+            gameIsRunning = false;
+            score = 0;
+            ((BasePool<Enemy>)poolManager.GetPool<Enemy>()).DeactivateAllInstances();
+            OnScoreChange -= gameFlow.OnScoreChange;
         }
 
         private async void StartEnemyCreation()
@@ -85,15 +110,11 @@ namespace ViewSystem.Views.Gameplay
         private void AddScore()
         {
             score += pointsForEnemyKill;
+            gameplayProcessor.Check(score);
             OnScoreChange?.Invoke(score);
         }
 
-        public void StopGame()
-        {
-            gameIsRunning = false;
-            ((BasePool<Enemy>)poolManager.GetPool<Enemy>()).DeactivateAllInstances();
-            OnScoreChange -= gameFlow.OnScoreChange;
-        }
+        
 
 
         // BAD solution

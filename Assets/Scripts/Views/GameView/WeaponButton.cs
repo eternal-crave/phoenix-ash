@@ -17,6 +17,8 @@ namespace Views.GameView
         [SerializeField] private Button button;
         [SerializeField] private WeaponType weaponType;
 
+        public WeaponType WeaponType => weaponType;
+
         private void OnValidate()
         {
             button = GetComponent<Button>();
@@ -35,6 +37,11 @@ namespace Views.GameView
         private void OnButtonClick()
         {
             OnClick?.Invoke(weaponType);
+        }
+
+        public void Activate()
+        {
+            gameObject.SetActive(true);
         }
     }
 }

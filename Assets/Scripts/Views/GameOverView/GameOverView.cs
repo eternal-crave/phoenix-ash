@@ -28,8 +28,8 @@ namespace ViewSystem.Views
 
         public void SetPlayerScores(int playerCurrentscore, int playerHighscore)
         {
-            HighScoreText.text = $"Highscore: {playerCurrentscore}";
-            LastScoreText.text = $"Highscore: {playerHighscore}";
+            HighScoreText.text = $"Highscore: {playerHighscore}";
+            LastScoreText.text = $"Score: {playerCurrentscore}";
         }
 
         private void OnEnable()

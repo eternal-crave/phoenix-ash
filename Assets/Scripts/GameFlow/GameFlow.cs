@@ -20,7 +20,7 @@ namespace GameFlow
         
         private int playerHighscore;
         private int playerCurrentscore;
-
+        private WeaponType defaultPlayerWeapon;
 
         public event Action OnGameStart;
         public event Action OnEndGame;
@@ -52,6 +52,7 @@ namespace GameFlow
         {
             GameViewPresenter presenter = viewManager.OpenView<GameView, GameViewPresenter>();
             presenter.SetValues((int)player.Health, 0);
+            presenter.ResetWeapons(defaultPlayerWeapon);
             player.OnGetDamage += presenter.OnPlayerGetDamage;
             player.OnDead += presenter.OnPlayerDead;
             presenter.OnWeaponChange += OnWeaponChangeInput;
@@ -80,6 +81,11 @@ namespace GameFlow
                 presenter.OnRestartButtonClick -= OpenGameView;
                 presenter.OnHomeButtonClick -= OpenStartView;
             });
+        }
+
+        public void SetDeafultWeapon(WeaponType defaultPlayerWeapon)
+        {
+            this.defaultPlayerWeapon = defaultPlayerWeapon;
         }
 
         public void GainWeapon(WeaponType weaponType)

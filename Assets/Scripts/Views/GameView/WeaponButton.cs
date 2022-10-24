@@ -43,5 +43,10 @@ namespace Views.GameView
         {
             gameObject.SetActive(true);
         }
+
+        public void Deactivate()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

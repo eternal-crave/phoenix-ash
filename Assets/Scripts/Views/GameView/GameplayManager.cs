@@ -84,8 +84,8 @@ namespace ViewSystem.Views.Gameplay
 
         private void InitWeapons()
         {
+            gameFlow.SetDeafultWeapon(defaultPlayerWeapon);
             ChangeWeapon(defaultPlayerWeapon);
-            //DeactivateWeapons();  
         }
 
         public void StopGame()

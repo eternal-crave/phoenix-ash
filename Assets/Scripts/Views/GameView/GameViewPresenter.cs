@@ -63,6 +63,11 @@ namespace ViewSystem.Presenters
             view.SetScore(score);
         }
 
+        public void ResetWeapons(WeaponType defaultPlayerWeapon)
+        {
+            view.ResetWeapons(defaultPlayerWeapon);
+        }
+
         public void UnlockWeapon(WeaponType weaponType)
         {
             view.UnlockWeapon(weaponType);

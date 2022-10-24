@@ -68,5 +68,17 @@ namespace ViewSystem.Views
         {
             weaponButtons.FirstOrDefault((b) => b.WeaponType == weaponType).Activate();
         }
+
+        public void ResetWeapons(WeaponType defaultPlayerWeapon)
+        {
+            foreach (WeaponButton b in weaponButtons)
+            {
+                if(b.WeaponType == defaultPlayerWeapon)
+                {
+                    continue;
+                }
+                b.Deactivate();
+            }
+        }
     }
 }

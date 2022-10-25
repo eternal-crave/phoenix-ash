@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: beacec26126076a4793849afdbb6f162, type: 3}
-  m_Name: SemiCircleWeapon
+  m_Name: ShotgunWeapon
   m_EditorClassIdentifier: 
   type: 1
   fireRate: 1

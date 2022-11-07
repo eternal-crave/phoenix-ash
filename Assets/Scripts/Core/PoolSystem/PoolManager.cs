@@ -10,7 +10,7 @@ using Zenject;
 
 namespace Core.PoolSystem
 {
-    public class PoolManager : MonoBehaviour
+    public class PoolManager
     {
         private Dictionary<Type, IPool> pools = new Dictionary<Type, IPool>();
         private FactoryManager factoryManager;

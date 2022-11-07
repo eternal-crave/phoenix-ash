@@ -18,7 +18,6 @@ namespace Installers
         [SerializeField] GameplayInput gameplayInput;
         [SerializeField] Player playerPrefab;
         [SerializeField] Transform playerSpawnPoint;
-        [SerializeField] PoolManager poolManager;
 
         public override void InstallBindings()
         {
@@ -49,7 +48,7 @@ namespace Installers
             Container.Bind<GameplayManager>().AsSingle().NonLazy();
             Container.Bind<FactoryManager>().AsSingle();
             Container.Bind<WeaponManager>().AsSingle();
-            Container.Bind<PoolManager>().FromInstance(poolManager).AsSingle();
+            Container.Bind<PoolManager>().AsSingle();
         }
 
         private void BindFactory<F>() where F : IFactoryMarker

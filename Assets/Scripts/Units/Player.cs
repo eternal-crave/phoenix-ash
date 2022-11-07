@@ -12,7 +12,7 @@ using Zenject;
 
 namespace Units
 {
-    public class Player : Unit
+    public class Player : Unit, IGetDamage
     {
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
@@ -21,13 +21,13 @@ namespace Units
         private Weapon weapon;
 
 
-        public override event Action<float> OnGetDamage;
-        public override event Action OnDead;
+        public event Action<float> OnGetDamage;
+        public event Action OnDead;
 
-        public override float Health => health;
-        public override float MaxHealth => maxHealth;
+        public float Health => health;
+        public float MaxHealth => maxHealth;
 
-        public override void GetDamage(float damage)
+        public void GetDamage(float damage)
         {
             if (health > damage)
             {
@@ -102,7 +102,7 @@ namespace Units
         {
             Vector2 lookDirection = bulletSpawnPoint.transform.position- transform.position;
             RaycastHit2D hit = Physics2D.Raycast(bulletSpawnPoint.position, lookDirection,float.MaxValue);
-            if (hit.collider != null && hit.transform.TryGetComponent(out Unit enemy))
+            if (hit.collider != null && hit.transform.TryGetComponent(out IGetDamage enemy))
             {
                 Attack(lookDirection);
             }

@@ -12,10 +12,10 @@ using Units.DeathZone;
 
 namespace Units
 {
-    public class Enemy : Unit, IMakeDamage, IPoolObject, IFactoryItemPlaceHolder
+    public class Enemy : Unit, IGetDamage, IMakeDamage, IPoolObject, IFactoryItemPlaceHolder
     {
-        public override event Action<float> OnGetDamage;
-        public override event Action OnDead;
+        public event Action<float> OnGetDamage;
+        public event Action OnDead;
         public event Action<IPoolObject> OnDeactivation;
 
         [SerializeField] private float health;
@@ -24,8 +24,8 @@ namespace Units
         [SerializeField] private float speed;
 
 
-        public override float Health => health;
-        public override float MaxHealth => maxHealth;
+        public float Health => health;
+        public float MaxHealth => maxHealth;
 
         public int ID => GetInstanceID();
 
@@ -41,7 +41,7 @@ namespace Units
             Move(targetPos);
         }
 
-        public override void GetDamage(float damage)
+        public void GetDamage(float damage)
         {
             if(health > damage)
             {

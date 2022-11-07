@@ -10,6 +10,8 @@ namespace Core.UnitSystem
     {
         event Action<float> OnGetDamage;
         event Action OnDead;
+        float Health { get; }
+        float MaxHealth { get; }
         void GetDamage(float damage);
     }
 }

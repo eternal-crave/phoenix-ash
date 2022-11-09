@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace Core.ViewSystem.Core
+namespace Core.ViewSystem
 {
-    public abstract class View : MonoBehaviour 
+    public abstract class View : MonoBehaviour
     {
         public virtual event Action OnClose;
         public virtual void Init(Action onClose)

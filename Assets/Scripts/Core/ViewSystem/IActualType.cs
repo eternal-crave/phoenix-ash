@@ -1,4 +1,4 @@
-﻿namespace Core.ViewSystem.Core
+﻿namespace Core.ViewSystem
 {
     public interface IActualTypeOfCouple<T>
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Core.ViewSystem.Core
+namespace Core.ViewSystem
 {
     public class ViewManager
     {

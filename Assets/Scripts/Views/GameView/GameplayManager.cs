@@ -1,16 +1,12 @@
 using Core.PoolSystem;
-using GameFlow.Managers;
 using System;
 using Random = UnityEngine.Random;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Units;
 using UnityEngine;
-using Weapons;
-using Zenject;
-using GameplayLogicProcessor;
 using Core.SaveSystem.PlayerPrefsSaveSystem;
+using GameConfiguration;
+using Weapons;
 
 namespace ViewSystem.Views.Gameplay
 {
@@ -22,35 +18,20 @@ namespace ViewSystem.Views.Gameplay
         private PoolManager poolManager;
         private GameFlow.GameFlow gameFlow;
         private PPSaveSystem saveSystem;
+        private GameConfig gameConfig;
+        private WeaponManager weaponManager; 
         private bool gameIsRunning;
 
-        // TODO rethink
         private int score = 0;
-        private int pointsForEnemyKill;
-        private float enemyCreationInterval;
-        private float creationOffsetFromEdges;
-        private GameplayProcessor gameplayProcessor;
-
-        public void SetGamePlayProcessorLogic(GameplayProcessor gameplayProcessor)
-        {
-            this.gameplayProcessor = gameplayProcessor;
-        }
-
-        public void SetInitialValues(int pointsForEnemyKill, float enemyCreationInterval, WeaponType defaultPlayerWeapon, float enemyBoxAreaOffset)
-        {
-            this.pointsForEnemyKill = pointsForEnemyKill;
-            this.enemyCreationInterval = enemyCreationInterval;
-            //this.defaultPlayerWeapon = defaultPlayerWeapon;
-            this.creationOffsetFromEdges = enemyBoxAreaOffset;
-        }
 
         public GameplayManager(PoolManager poolManager, Player player,
-            GameFlow.GameFlow gameFlow, PPSaveSystem saveSystem)
+            GameFlow.GameFlow gameFlow, PPSaveSystem saveSystem, GameConfig gameConfig, WeaponManager weaponManager)
         {
             this.poolManager = poolManager;
             this.player = player;
             this.gameFlow = gameFlow;
             this.saveSystem = saveSystem;
+            this.gameConfig = gameConfig;
 
             // Without unsubscribtion, cuz subsrcribtion happens only once
             // TODO rethink
@@ -64,6 +45,7 @@ namespace ViewSystem.Views.Gameplay
         public void StartGame()
         {
             player.Activate();
+            weaponManager.Init(); // TODO test
             gameIsRunning = true;
             StartEnemyCreation();
         }
@@ -91,15 +73,15 @@ namespace ViewSystem.Views.Gameplay
             {
                 Enemy enemy = poolManager.Get<Enemy>();
                 enemy.OnDead += AddScore;
-                enemy.Init(GetEnemyCreationPoint(creationOffsetFromEdges), player.transform.position);
-                await Task.Delay(TimeSpan.FromSeconds(enemyCreationInterval));
+                enemy.Init(GetEnemyCreationPoint(gameConfig.CreationOffsetFromEdges), player.transform.position);
+                await Task.Delay(TimeSpan.FromSeconds(gameConfig.EnemyCreationInterval));
             }
         }
 
         private void AddScore()
         {
-            score += pointsForEnemyKill;
-            gameplayProcessor.Check(score);
+            score += gameConfig.PointsForEnemyKill;
+            weaponManager.UnlockAvailableWeapons(score);
             OnScoreChange?.Invoke(score);
         }
 

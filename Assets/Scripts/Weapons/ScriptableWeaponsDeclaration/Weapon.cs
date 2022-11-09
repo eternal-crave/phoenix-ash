@@ -16,6 +16,8 @@ namespace Weapons
         protected float lastShootTime;
         protected Pool<Bullet> ammoPool;
 
+        public WeaponType WeaponType => type;
+
         public abstract void Shoot(Vector3 origin, Quaternion rotation, Vector3 direction);
         protected virtual Bullet GetAmmo()
         {

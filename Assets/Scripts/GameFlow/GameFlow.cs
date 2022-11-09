@@ -1,14 +1,12 @@
-﻿using Core.SaveSystem.PlayerPrefsSaveSystem;
-using Core.ViewSystem.Core;
+﻿using Core.ViewSystem;
 using System;
 using Units;
-using UnityEngine;
 using ViewSystem.Views;
-using Weapons;
+using Zenject;
 
 namespace GameFlow
 {
-    public class GameFlow
+    public class GameFlow : IInitializable
     {
 
         private ViewManager viewManager;
@@ -23,6 +21,11 @@ namespace GameFlow
         {
             this.viewManager = viewManager;  
             this.player = player;
+        }
+
+        public void Initialize()
+        {
+            StartGameFlow();
         }
 
         public void StartGameFlow()
@@ -57,6 +60,8 @@ namespace GameFlow
             {
                 view.RemoveButtonsLiateners();
             });
-        }    
+        }
+
+        
     }
 }

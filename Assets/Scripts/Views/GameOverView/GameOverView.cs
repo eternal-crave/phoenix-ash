@@ -1,4 +1,4 @@
-using Core.ViewSystem.Core;
+using Core.ViewSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;

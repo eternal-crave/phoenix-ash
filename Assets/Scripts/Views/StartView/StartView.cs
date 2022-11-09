@@ -1,4 +1,3 @@
-using Core.ViewSystem.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using Core.SaveSystem.PlayerPrefsSaveSystem;
 using Zenject;
+using Core.ViewSystem;
 
 namespace ViewSystem.Views
 {

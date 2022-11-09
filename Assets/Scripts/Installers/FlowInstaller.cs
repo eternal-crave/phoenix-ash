@@ -1,8 +1,5 @@
-using GameFlow.Managers;
-using Core.ViewSystem.Core;
-using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
+using Core.ViewSystem;
 
 namespace Installers
 {
@@ -11,7 +8,7 @@ namespace Installers
         public override void InstallBindings()
         {
             Container.Bind<ViewManager>().AsSingle().NonLazy();
-            Container.Bind<GameFlow.GameFlow>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<GameFlow.GameFlow>().AsSingle().NonLazy();
         }
     }
 }

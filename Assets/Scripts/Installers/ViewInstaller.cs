@@ -1,9 +1,7 @@
-using GameFlow.Managers;
-using Core.ViewSystem.Core;
-using System.Collections.Generic;
 using UnityEngine;
 using ViewSystem.Views;
 using Zenject;
+using Core.ViewSystem;
 
 namespace Installers
 {

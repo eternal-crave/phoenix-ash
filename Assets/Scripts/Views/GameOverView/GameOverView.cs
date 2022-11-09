@@ -4,57 +4,59 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
+using ViewSystem.Views.Gameplay;
+using Zenject;
 
 namespace ViewSystem.Views
 {
     public class GameOverView : View
     {
-         public event Action OnRestartButtonClick;
-        public event Action OnHomeButtonClick;
-
-        [SerializeField] private TMP_Text HighScoreText;
-        [SerializeField] private TMP_Text LastScoreText;
+        [SerializeField] private TMP_Text highScoreText;
+        [SerializeField] private TMP_Text lastScoreText;
         [SerializeField] private Button homeButton;
         [SerializeField] private Button restartButton;
+        private GameplayManager gameplayManager;
 
-        public Button HomeButton => homeButton;
-        public Button RestartButton => restartButton;
 
+        [Inject]
+        private void Construct(GameplayManager gameplayManager)
+        {
+            this.gameplayManager = gameplayManager;
+        }
         public override void Init(Action onClose)
         {
             base.Init(onClose);
+            SetPlayerScores();
         }
 
-        public void SetPlayerScores(int playerCurrentscore, int playerHighscore)
+        public void SetPlayerScores()
         {
-            HighScoreText.text = $"Highscore: {playerHighscore}";
-            LastScoreText.text = $"Score: {playerCurrentscore}";
+            gameplayManager.GetScoreInfo(out float playerCurrentscore, out float playerHighscore);
+            highScoreText.text = $"Highscore: {playerHighscore}";
+            lastScoreText.text = $"Score: {playerCurrentscore}";
         }
 
-        private void OnEnable()
+        public void AddListenerToHomeButton(UnityAction onClick)
         {
-            restartButton.onClick.AddListener(OnRestartButtonClicked);
-            homeButton.onClick.AddListener(OnHomeButtonClicked);
+            homeButton.onClick.AddListener(onClick);
+            Close();
         }
 
-        private void OnDisable()
+        public void AddListenerToRestartButton(UnityAction onClick)
         {
-            restartButton.onClick.RemoveAllListeners();
+            restartButton.onClick.AddListener(onClick);
+            Close();
+        }
+
+        public void RemoveButtonsLiateners()
+        {
             homeButton.onClick.RemoveAllListeners();
+            restartButton.onClick.RemoveAllListeners();
         }
 
-        private void OnHomeButtonClicked()
-        {
-            OnHomeButtonClick?.Invoke();
-            Close();
-        }
 
-        private void OnRestartButtonClicked()
-        {
-            OnRestartButtonClick?.Invoke();
-            Close();
-        }
 
 
 

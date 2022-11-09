@@ -27,6 +27,12 @@ namespace Units
         public float Health => health;
         public float MaxHealth => maxHealth;
 
+        [Inject]
+        private void Construct(GameplayInput gameplayInput)
+        {
+            this.gameplayInput = gameplayInput;
+        }
+
         public void GetDamage(float damage)
         {
             if (health > damage)
@@ -39,18 +45,13 @@ namespace Units
             Deactivate();
         }
 
-        public void Init(GameplayInput gameplayInput)
-        {
-            this.gameplayInput = gameplayInput;
-        }
-
         public void SetWeapon(Weapon weapon)
         {
             this.weapon = weapon;
             Debug.Log(weapon.GetType());
         }
 
-        private void OnUserInputHandler(Vector3 position)
+        private void UserInputHandler(Vector3 position)
         {
             Move(position);
         }
@@ -72,12 +73,12 @@ namespace Units
 
         private void OnEnable()
         {
-            gameplayInput.OnPlayerInput += OnUserInputHandler;
+            gameplayInput.OnPlayerInput += UserInputHandler;
         }
 
         private void OnDisable()
         {
-            gameplayInput.OnPlayerInput -= OnUserInputHandler;
+            gameplayInput.OnPlayerInput -= UserInputHandler;
             OnGetDamage = null;
             OnDead = null;
         }

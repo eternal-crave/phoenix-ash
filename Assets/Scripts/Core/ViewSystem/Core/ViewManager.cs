@@ -9,22 +9,16 @@ namespace Core.ViewSystem.Core
 {
     public class ViewManager
     {
-        List<Presenter> viewPresenters = new List<Presenter>();
+        List<View> views;
 
-        public ViewManager(List<Presenter> presenters)
+        public ViewManager(List<View> presenters)
         {
-            viewPresenters = presenters;
+            views = presenters;
         }
 
-        public Presenter OpenView<V>() where V : View
+        public V OpenView<V>() where V : View
         {
-            return viewPresenters.FirstOrDefault((p) => p.View.GetType() == typeof(V));
-        }
-
-        public P OpenView<V, P>() where V : View where P: Presenter
-        {
-
-            return (P)viewPresenters.FirstOrDefault((p) => p.View.GetType() == typeof(V));
+            return (V)views.FirstOrDefault((p) => GetType() == typeof(V));
         }
     }
 }

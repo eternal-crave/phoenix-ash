@@ -10,85 +10,79 @@ using UnityEngine;
 using Weapons;
 using Zenject;
 using GameplayLogicProcessor;
+using Core.SaveSystem.PlayerPrefsSaveSystem;
 
 namespace ViewSystem.Views.Gameplay
 {
     public class GameplayManager
     {
-        private event Action<int> OnScoreChange;
+        public event Action<int> OnScoreChange;
 
         private Player player;
         private PoolManager poolManager;
-        private GameplayInput gameplayInput;
-        private WeaponManager weaponManager;
         private GameFlow.GameFlow gameFlow;
-
+        private PPSaveSystem saveSystem;
         private bool gameIsRunning;
+
+        // TODO rethink
         private int score = 0;
         private int pointsForEnemyKill;
         private float enemyCreationInterval;
-        private WeaponType defaultPlayerWeapon;
         private float creationOffsetFromEdges;
         private GameplayProcessor gameplayProcessor;
-
-        public GameplayInput GameplayInput => gameplayInput;
-
-        public Player GetPlayer()
-        {
-            return player;
-        }
 
         public void SetGamePlayProcessorLogic(GameplayProcessor gameplayProcessor)
         {
             this.gameplayProcessor = gameplayProcessor;
-
-            // Without unsubscribtion, cuz subsrcribtion happens only once
-            gameplayProcessor.OnNewWeaponGain += gameFlow.GainWeapon;
         }
 
         public void SetInitialValues(int pointsForEnemyKill, float enemyCreationInterval, WeaponType defaultPlayerWeapon, float enemyBoxAreaOffset)
         {
             this.pointsForEnemyKill = pointsForEnemyKill;
             this.enemyCreationInterval = enemyCreationInterval;
-            this.defaultPlayerWeapon = defaultPlayerWeapon;
+            //this.defaultPlayerWeapon = defaultPlayerWeapon;
             this.creationOffsetFromEdges = enemyBoxAreaOffset;
-            gameFlow.SetDeafultWeapon(defaultPlayerWeapon);
         }
 
-        public GameplayManager(PoolManager poolManager, Player player, 
-            GameplayInput gameplayInput, WeaponManager weaponManager, GameFlow.GameFlow gameFlow)
+        public GameplayManager(PoolManager poolManager, Player player,
+            GameFlow.GameFlow gameFlow, PPSaveSystem saveSystem)
         {
             this.poolManager = poolManager;
-            this.gameplayInput = gameplayInput;
             this.player = player;
-            this.weaponManager = weaponManager;
             this.gameFlow = gameFlow;
+            this.saveSystem = saveSystem;
 
             // Without unsubscribtion, cuz subsrcribtion happens only once
+            // TODO rethink
             gameFlow.OnGameStart += StartGame;
             gameFlow.OnEndGame += StopGame;
-            gameFlow.OnWeaponChange += ChangeWeapon;
+
         }
 
         
 
         public void StartGame()
         {
-
-            player.Init(gameplayInput);
             player.Activate();
-            ChangeWeapon(defaultPlayerWeapon);
             gameIsRunning = true;
             StartEnemyCreation();
-            OnScoreChange += gameFlow.OnScoreChange;
         }
 
         public void StopGame()
         {
             gameIsRunning = false;
+            SaveHighScore(score);
             score = 0;
             ((BasePool<Enemy>)poolManager.GetPool<Enemy>()).DeactivateAllInstances();
-            OnScoreChange -= gameFlow.OnScoreChange;
+        }
+
+        private void SaveHighScore(int playerScore)
+        {
+            if (saveSystem.Load().Highscore >= playerScore)
+            {
+                return;
+            }
+            saveSystem.Save(new PPSaveSystemData() { Highscore = playerScore });
         }
 
         private async void StartEnemyCreation()
@@ -109,29 +103,12 @@ namespace ViewSystem.Views.Gameplay
             OnScoreChange?.Invoke(score);
         }
 
-        
-
-
-        // BAD solution
-        public void ChangeWeapon(WeaponType type)
+        public void GetScoreInfo(out float currentScore, out float highScore)
         {
-            Weapon weapon;
-            switch (type)
-            {
-                case WeaponType.ShotGun:
-                    weapon = weaponManager.GetWeapon<ShotGunWeapon>();
-                    break;
-                case WeaponType.Queue:
-                    weapon = weaponManager.GetWeapon<QueueWeapon>();
-                    break;
-                default:
-                    weapon = weaponManager.GetWeapon<SingleWeapon>();
-                    break;
-            }
-
-            weapon.Init(poolManager.GetPool<Bullet>());
-            player.SetWeapon(weapon);
+            currentScore = score;
+            highScore = saveSystem.Load().Highscore;
         }
+
 
         private Vector3 GetRandomVector3Range(Vector3 minPosition, Vector3 maxPosition)
         {

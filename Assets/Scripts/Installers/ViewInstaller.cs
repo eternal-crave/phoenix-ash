@@ -2,7 +2,6 @@ using GameFlow.Managers;
 using Core.ViewSystem.Core;
 using System.Collections.Generic;
 using UnityEngine;
-using ViewSystem.Presenters;
 using ViewSystem.Views;
 using Zenject;
 
@@ -14,17 +13,16 @@ namespace Installers
         private const string path = "ViewPrefabs\\";
         public override void InstallBindings()
         {
-            RegisterView<StartView, StartViewPresenter>();
-            RegisterView<GameView, GameViewPresenter>();
-            RegisterView<GameOverView, GameOverViewPresenter>();
+            RegisterView<StartView>();
+            RegisterView<GameView>();
+            RegisterView<GameOverView>();
 
         }
 
-        private void RegisterView<V, P>() where V : View, new() where P : Presenter
+        private void RegisterView<V>() where V : View
         {
             V view = (V)Container.InstantiatePrefabResourceForComponent<View>(path + typeof(V).Name, instantiateContainer);
-            Container.Bind<View>().To<V>().FromInstance(view).AsSingle().WhenInjectedInto<P>().NonLazy();
-            Container.Bind<Presenter>().To<P>().AsSingle().NonLazy();
+            Container.Bind<View>().To<V>().FromInstance(view).AsSingle().NonLazy();
         }
     }
 }

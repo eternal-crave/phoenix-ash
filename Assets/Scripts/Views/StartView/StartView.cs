@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Core.SaveSystem.PlayerPrefsSaveSystem;
+using Zenject;
 
 namespace ViewSystem.Views
 {
@@ -12,6 +14,13 @@ namespace ViewSystem.Views
     {
         [SerializeField] private TMP_Text highscoreText;
         [SerializeField] private Button tapToStartButton;
+        private PPSaveSystem saveSystem;
+
+        [Inject]
+        private void Construct(PPSaveSystem saveSystem)
+        {
+            this.saveSystem = saveSystem;
+        }
 
         public override void Init(Action onClose)
         {
@@ -33,7 +42,7 @@ namespace ViewSystem.Views
 
         public void SetHighScoreText(int score)
         {
-            highscoreText.text = $"HighScore: {score}";
+            highscoreText.text = $"HighScore: {saveSystem.Load().Highscore}";
         }
 
 

@@ -1,3 +1,4 @@
+using Core.ScoreSystem;
 using Core.ViewSystem;
 using System;
 using System.Collections.Generic;
@@ -22,16 +23,15 @@ namespace ViewSystem.Views
         [SerializeField] private List<WeaponButton> weaponButtons;
         private WeaponManager weaponManager;
         private Player player;
-        private GameplayManager gameplayManager;
+        private ScoreCounter scoreCouter;
 
         [Inject]
-        private void Construct(WeaponManager weaponManager, Player player, GameplayManager gameplayManager)
+        private void Construct(WeaponManager weaponManager, Player player, ScoreCounter scoreCouter)
         {
             this.weaponManager = weaponManager;
             this.player = player;
-            this.gameplayManager = gameplayManager;
+            this.scoreCouter = scoreCouter;
         }
-
 
         private void OnEnable()
         {
@@ -52,7 +52,7 @@ namespace ViewSystem.Views
             ResetWeapons(weaponManager.DefaultWeaponType);
             player.OnGetDamage += UpdateHealtText;
             player.OnDead += OnPlayerDead;
-            gameplayManager.OnScoreChange += SetScore;
+            scoreCouter.OnScoreChange += SetScore;
             weaponManager.OnNewWeaponUnlock += UnlockWeapon;
 
         }
@@ -82,7 +82,7 @@ namespace ViewSystem.Views
         {
             player.OnGetDamage -= UpdateHealtText;
             player.OnDead -= OnPlayerDead;
-            gameplayManager.OnScoreChange -= SetScore;
+            scoreCouter.OnScoreChange -= SetScore;
             weaponManager.OnNewWeaponUnlock += UnlockWeapon;
 
 

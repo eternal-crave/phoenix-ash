@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd6bb93987b99e40a0fe98db19ec2ee, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  defaultPlayerWeapon: 0
+  pointsForEnemyKill: 1
+  enemyCreationInterval: 2
+  creationOffsetFromEdges: 100
+  weaponPointsPair:
+    m_keys: 0100000002000000
+    m_values: 0500000014000000

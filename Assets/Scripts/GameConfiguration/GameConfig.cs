@@ -4,16 +4,25 @@ using Weapons;
 
 namespace GameConfiguration
 {
+    [CreateAssetMenu(fileName = "GameConfigSample", menuName = "GameConfig/GameConfigSample")]
     public class GameConfig : ScriptableObject
     {
         [Header("Player")]
-        public readonly WeaponType DefaultPlayerWeapon;
+        [SerializeField] private WeaponType defaultPlayerWeapon;
 
         [Header("Enemies")]
-        public readonly int PointsForEnemyKill = 1;
-        public readonly float EnemyCreationInterval = 2;
-        public readonly float CreationOffsetFromEdges = 100f;
+        [SerializeField] private int pointsForEnemyKill = 1;
+        [SerializeField] private float enemyCreationInterval = 2;
+        [SerializeField] private float creationOffsetFromEdges = 100f;
 
-        public readonly WeaponTypeIntDictionary WeaponPointsPair;
+        [Header("Logic")]
+        [SerializeField] private WeaponTypeIntDictionary weaponPointsPair;
+
+        public WeaponType DefaultPlayerWeapon => defaultPlayerWeapon;
+
+        public int PointsForEnemyKill => pointsForEnemyKill;
+        public float EnemyCreationInterval => enemyCreationInterval;
+        public float CreationOffsetFromEdges => creationOffsetFromEdges;
+        public WeaponTypeIntDictionary WeaponPointsPair => weaponPointsPair;
     }
 }

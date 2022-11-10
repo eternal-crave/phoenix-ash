@@ -7,6 +7,7 @@ using TMPro;
 using Core.SaveSystem.PlayerPrefsSaveSystem;
 using Zenject;
 using Core.ViewSystem;
+using Core.ScoreSystem;
 
 namespace ViewSystem.Views
 {
@@ -14,18 +15,19 @@ namespace ViewSystem.Views
     {
         [SerializeField] private TMP_Text highscoreText;
         [SerializeField] private Button tapToStartButton;
-        private PPSaveSystem saveSystem;
+        private ScoreCounter scoreCounter;
 
         [Inject]
-        private void Construct(PPSaveSystem saveSystem)
+        private void Construct(ScoreCounter scoreCounter)
         {
-            this.saveSystem = saveSystem;
+            this.scoreCounter = scoreCounter;
         }
 
         public override void Init(Action onClose)
         {
             base.Init(onClose);
             tapToStartButton.onClick.AddListener(onTapToStartButtonPress);
+            SetHighScoreText();
 
         }
 
@@ -40,9 +42,9 @@ namespace ViewSystem.Views
             tapToStartButton.onClick.RemoveAllListeners();
         }
 
-        public void SetHighScoreText(int score)
+        public void SetHighScoreText()
         {
-            highscoreText.text = $"HighScore: {saveSystem.Load().Highscore}";
+            highscoreText.text = $"HighScore: {scoreCounter.Highscore}";
         }
 
 

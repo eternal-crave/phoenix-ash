@@ -313,9 +313,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1126571459}
   - component: {fileID: 1126571458}
-  - component: {fileID: 1126571457}
   - component: {fileID: 1126571460}
-  - component: {fileID: 1126571461}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -323,19 +321,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1126571457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1126571456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c61cfab264584443b1560f44fb71ca4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  instantiateContainer: {fileID: 1260700783}
 --- !u!114 &1126571458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,8 +335,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 1126571461}
-  - {fileID: 1126571457}
   - {fileID: 1126571460}
   _installerPrefabs: []
   _autoRun: 1
@@ -393,25 +376,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1126571456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b4d93e6daa38324bab1889172c30a20, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f31d063d513e954c87899d61dd0333c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1126571461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1126571456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a217d171b65fcac49a938c9baed594ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameplayInputContainer: {fileID: 1260700783}
-  gameplayInput: {fileID: 714057936327235751, guid: d5b603d4c91221045a6ec53d7b74d268, type: 3}
   playerPrefab: {fileID: 4481457331350679762, guid: 54ecb0764300cf24bbfc414bdfe09644, type: 3}
   playerSpawnPoint: {fileID: 1750052578}
+  gameConfig: {fileID: 11400000, guid: 283a7b6091ffdc94c8c2aaa637473c83, type: 2}
+  gameplayInputContainer: {fileID: 1260700783}
+  gameplayInput: {fileID: 714057936327235751, guid: d5b603d4c91221045a6ec53d7b74d268, type: 3}
+  instantiateContainer: {fileID: 1260700783}
 --- !u!1 &1260700782
 GameObject:
   m_ObjectHideFlags: 0

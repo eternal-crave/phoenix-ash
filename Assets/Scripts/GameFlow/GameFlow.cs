@@ -10,17 +10,15 @@ namespace GameFlow
     {
 
         private ViewManager viewManager;
-        private Player player;
         
         public event Action OnGameStart;
         public event Action OnEndGame;
 
 
 
-        public GameFlow(ViewManager viewManager, Player player)
+        public GameFlow(ViewManager viewManager)
         {
             this.viewManager = viewManager;  
-            this.player = player;
         }
 
         public void Initialize()

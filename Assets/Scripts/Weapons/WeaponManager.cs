@@ -28,6 +28,7 @@ namespace Weapons
             this.gameConfig = gameConfig;
 
             weapons = new List<Weapon>();
+            weaponAccessability = new Dictionary<WeaponType, bool>();
             weapons.AddRange(Resources.LoadAll<Weapon>(path));
             weapons.ForEach(w =>
             {

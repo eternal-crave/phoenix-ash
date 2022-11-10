@@ -7,31 +7,35 @@ using UnityEngine;
 using Core.SaveSystem.PlayerPrefsSaveSystem;
 using GameConfiguration;
 using Weapons;
+using Core.ScoreSystem;
 
 namespace ViewSystem.Views.Gameplay
 {
     public class GameplayManager
     {
-        public event Action<int> OnScoreChange;
+        
 
         private Player player;
         private PoolManager poolManager;
         private GameFlow.GameFlow gameFlow;
         private PPSaveSystem saveSystem;
         private GameConfig gameConfig;
-        private WeaponManager weaponManager; 
+        private WeaponManager weaponManager;
+        private ScoreCounter scoreCounter;
         private bool gameIsRunning;
 
-        private int score = 0;
-
+        
         public GameplayManager(PoolManager poolManager, Player player,
-            GameFlow.GameFlow gameFlow, PPSaveSystem saveSystem, GameConfig gameConfig, WeaponManager weaponManager)
+            GameFlow.GameFlow gameFlow, PPSaveSystem saveSystem, GameConfig gameConfig, WeaponManager weaponManager,
+            ScoreCounter scoreCounter)
         {
             this.poolManager = poolManager;
             this.player = player;
             this.gameFlow = gameFlow;
             this.saveSystem = saveSystem;
             this.gameConfig = gameConfig;
+            this.weaponManager = weaponManager;
+            this.scoreCounter = scoreCounter;
 
             // Without unsubscribtion, cuz subsrcribtion happens only once
             // TODO rethink
@@ -39,8 +43,6 @@ namespace ViewSystem.Views.Gameplay
             gameFlow.OnEndGame += StopGame;
 
         }
-
-        
 
         public void StartGame()
         {
@@ -53,8 +55,8 @@ namespace ViewSystem.Views.Gameplay
         public void StopGame()
         {
             gameIsRunning = false;
-            SaveHighScore(score);
-            score = 0;
+            SaveHighScore(scoreCounter.Score);
+            scoreCounter.ResetScore();
             ((BasePool<Enemy>)poolManager.GetPool<Enemy>()).DeactivateAllInstances();
         }
 
@@ -80,17 +82,9 @@ namespace ViewSystem.Views.Gameplay
 
         private void AddScore()
         {
-            score += gameConfig.PointsForEnemyKill;
-            weaponManager.UnlockAvailableWeapons(score);
-            OnScoreChange?.Invoke(score);
+            scoreCounter.AddScore(gameConfig.PointsForEnemyKill);
+            weaponManager.UnlockAvailableWeapons(scoreCounter.Score);
         }
-
-        public void GetScoreInfo(out float currentScore, out float highScore)
-        {
-            currentScore = score;
-            highScore = saveSystem.Load().Highscore;
-        }
-
 
         private Vector3 GetRandomVector3Range(Vector3 minPosition, Vector3 maxPosition)
         {

@@ -1,3 +1,4 @@
+using Core.ScoreSystem;
 using Core.ViewSystem;
 using System;
 using System.Collections;
@@ -17,13 +18,12 @@ namespace ViewSystem.Views
         [SerializeField] private TMP_Text lastScoreText;
         [SerializeField] private Button homeButton;
         [SerializeField] private Button restartButton;
-        private GameplayManager gameplayManager;
-
+        private ScoreCounter scoreCounter;
 
         [Inject]
-        private void Construct(GameplayManager gameplayManager)
+        private void Construct(ScoreCounter scoreCounter)
         {
-            this.gameplayManager = gameplayManager;
+            this.scoreCounter = scoreCounter;
         }
         public override void Init(Action onClose)
         {
@@ -33,7 +33,7 @@ namespace ViewSystem.Views
 
         public void SetPlayerScores()
         {
-            gameplayManager.GetScoreInfo(out float playerCurrentscore, out float playerHighscore);
+            scoreCounter.GetScoreInfo(out float playerCurrentscore, out float playerHighscore);
             highScoreText.text = $"Highscore: {playerHighscore}";
             lastScoreText.text = $"Score: {playerCurrentscore}";
         }

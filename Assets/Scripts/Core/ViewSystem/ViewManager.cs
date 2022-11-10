@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using ViewSystem.Views;
 
 namespace Core.ViewSystem
 {
@@ -11,14 +12,14 @@ namespace Core.ViewSystem
     {
         List<View> views;
 
-        public ViewManager(List<View> presenters)
+        public ViewManager(List<View> views)
         {
-            views = presenters;
+            this.views = views;
         }
 
         public V OpenView<V>() where V : View
         {
-            return (V)views.FirstOrDefault((p) => GetType() == typeof(V));
+            return (V)views.FirstOrDefault((p) => p.GetType() == typeof(V));
         }
     }
 }

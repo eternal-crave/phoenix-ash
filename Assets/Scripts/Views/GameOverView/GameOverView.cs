@@ -41,16 +41,16 @@ namespace ViewSystem.Views
         public void AddListenerToHomeButton(UnityAction onClick)
         {
             homeButton.onClick.AddListener(onClick);
-            Close();
+            homeButton.onClick.AddListener(Close);
         }
 
         public void AddListenerToRestartButton(UnityAction onClick)
         {
             restartButton.onClick.AddListener(onClick);
-            Close();
+            restartButton.onClick.AddListener(Close);
         }
 
-        public void RemoveButtonsLiateners()
+        public void RemoveButtonsListeners()
         {
             homeButton.onClick.RemoveAllListeners();
             restartButton.onClick.RemoveAllListeners();

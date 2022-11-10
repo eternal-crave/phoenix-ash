@@ -17,5 +17,5 @@ MonoBehaviour:
   enemyCreationInterval: 2
   creationOffsetFromEdges: 100
   weaponPointsPair:
-    m_keys: 0100000002000000
+    m_keys: 0200000001000000
     m_values: 0500000014000000

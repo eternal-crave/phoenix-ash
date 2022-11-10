@@ -84,6 +84,7 @@ namespace Weapons
                 {
                     UnlockWeapon(weaponType);
                     OnNewWeaponUnlock?.Invoke(weaponType);
+                    break;
                 }
             }
         }

@@ -56,7 +56,7 @@ namespace GameFlow
             view.AddListenerToRestartButton(OpenGameView);
             view.Init(() =>
             {
-                view.RemoveButtonsLiateners();
+                view.RemoveButtonsListeners();
             });
         }
 

@@ -12,7 +12,7 @@ using Units.DeathZone;
 
 namespace Units
 {
-    public class Enemy : Unit, IGetDamage, IMakeDamage, IPoolObject, IFactoryItemPlaceHolder
+    public class Enemy : MonoBehaviour, IGetDamage, IMakeDamage, IPoolObject, IFactoryItemPlaceHolder
     {
         public event Action<float> OnGetDamage;
         public event Action OnDead;

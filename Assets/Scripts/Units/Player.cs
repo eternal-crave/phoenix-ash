@@ -12,7 +12,7 @@ using Zenject;
 
 namespace Units
 {
-    public class Player : Unit, IGetDamage
+    public class Player : MonoBehaviour, IGetDamage
     {
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;

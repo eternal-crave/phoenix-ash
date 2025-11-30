@@ -70,7 +70,7 @@ Assets/
 
 ## Requirements
 
-- **Unity Version**: 2020.3.15f2 or compatible
+- **Unity Version**: 6000.2.6f2 or compatible
 
 ## Setup
 
@@ -83,7 +83,7 @@ Assets/
 2. **Open in Unity**
    - Open Unity Hub
    - Click "Add" and select the project folder
-   - Ensure Unity 2020.3.15f2 or compatible version is installed
+   - Ensure Unity 6000.2.6f2 or compatible version is installed
    - Open the project
 
 3. **Configure the Scene**
